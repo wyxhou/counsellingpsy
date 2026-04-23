@@ -3,709 +3,920 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Counselling Across Groups — Exam Prep</title>
+<title>Counselling Across Groups · Exam Prep</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
+:root {
+  --bg: #faf8f5;
+  --text: #1a1520;
+  --muted: #7a7080;
+  --u1c: #5c3d8f; --u1l: #ede7f6; --u1m: #9c7cc4; --u1b: #f3f0fb;
+  --u2c: #c0392b; --u2l: #fdecea; --u2m: #e07060; --u2b: #fff4f3;
+  --u3c: #1a6b4a; --u3l: #e6f4ee; --u3m: #4aac7d; --u3b: #f0faf5;
+  --u4c: #b5590a; --u4l: #fff3e6; --u4m: #e08040; --u4b: #fff8f0;
+  --qc: #1a3f6b; --ql: #e6eef8; --qm: #4a7cc4; --qb: #f0f5ff;
+  --wb: #2d2440; --wl: #f5f0ff;
+  --card: #ffffff;
+  --border: #e8e2f0;
+  --radius: 16px;
+  --shadow: 0 2px 16px rgba(0,0,0,0.07);
+}
 
-  :root {
-    --bg: #0f0f13;
-    --surface: #17171e;
-    --surface2: #1e1e28;
-    --border: #2a2a38;
-    --text: #e8e6f0;
-    --muted: #8885a0;
-    --u1: #7c6af5;
-    --u2: #e86f4a;
-    --u3: #3dbf8a;
-    --u4: #f0b429;
-    --quiz: #e84a7a;
-    --radius: 12px;
-  }
+:root.dark {
+  --bg: #14121a;
+  --text: #ece8f3;
+  --muted: #b9afc6;
+  --u1b: #2a2239;
+  --u2b: #3a2523;
+  --u3b: #1f3128;
+  --u4b: #3a2e20;
+  --qb: #222f44;
+  --wl: #261f37;
+  --card: #1d1927;
+  --border: #3a3249;
+  --shadow: 0 6px 24px rgba(0,0,0,0.35);
+}
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    line-height: 1.7;
-    min-height: 100vh;
-  }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14.5px;
+  line-height: 1.75;
+  min-height: 100vh;
+}
 
-  /* HEADER */
-  header {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    padding: 16px 20px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .header-inner { max-width: 900px; margin: 0 auto; }
-  header h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.1rem;
-    color: var(--text);
-    letter-spacing: 0.01em;
-  }
-  header p { font-size: 0.75rem; color: var(--muted); margin-top: 1px; }
+/* === HEADER === */
+header {
+  background: linear-gradient(135deg, #2d2440 0%, #4a2d70 50%, #2d2440 100%);
+  padding: 28px 24px 24px;
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+}
+header::after {
+  content: '';
+  position: absolute;
+  bottom: -40px; left: 30px;
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+}
+.header-inner { max-width: 900px; margin: 0 auto; position: relative; }
+.header-controls { position: absolute; top: 0; right: 0; }
+.theme-toggle {
+  border: 1px solid rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.1s;
+}
+.theme-toggle:hover { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.6); }
+.theme-toggle:active { transform: translateY(1px); }
+header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: white;
+  line-height: 1.2;
+}
+header p { color: rgba(255,255,255,0.6); font-size: 0.8rem; margin-top: 4px; }
+.header-tags { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+.htag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 0.04em;
+}
 
-  /* NAV TABS */
-  nav {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    overflow-x: auto;
-    scrollbar-width: none;
-    position: sticky;
-    top: 64px;
-    z-index: 99;
-  }
-  nav::-webkit-scrollbar { display: none; }
-  .nav-inner {
-    max-width: 900px;
-    margin: 0 auto;
-    display: flex;
-    gap: 2px;
-    padding: 0 16px;
-  }
-  .tab {
-    padding: 10px 14px;
-    border: none;
-    background: transparent;
-    color: var(--muted);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 500;
-    cursor: pointer;
-    white-space: nowrap;
-    border-bottom: 2px solid transparent;
-    transition: all 0.15s;
-    letter-spacing: 0.02em;
-  }
-  .tab:hover { color: var(--text); }
-  .tab.active { color: var(--text); }
-  .tab[data-tab="u1"].active { border-color: var(--u1); color: var(--u1); }
-  .tab[data-tab="u2"].active { border-color: var(--u2); color: var(--u2); }
-  .tab[data-tab="u3"].active { border-color: var(--u3); color: var(--u3); }
-  .tab[data-tab="u4"].active { border-color: var(--u4); color: var(--u4); }
-  .tab[data-tab="quiz"].active { border-color: var(--quiz); color: var(--quiz); }
+/* === NAV === */
+nav {
+  background: white;
+  border-bottom: 2px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+:root.dark nav {
+  background: #1a1723;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.35);
+}
+:root.dark .section-head:hover { background: #242031; }
+:root.dark .pill,
+:root.dark .diagram-wrap,
+:root.dark .wb-q,
+:root.dark .wb-answer {
+  background: #1b1724;
+}
+:root.dark tr:hover td { filter: brightness(1.08); }
+nav::-webkit-scrollbar { display: none; }
+.nav-inner {
+  max-width: 900px; margin: 0 auto;
+  display: flex; gap: 0; padding: 0 12px;
+}
+.tab {
+  padding: 14px 16px;
+  border: none; background: transparent;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.78rem; font-weight: 600;
+  cursor: pointer; white-space: nowrap;
+  border-bottom: 3px solid transparent;
+  color: var(--muted);
+  transition: all 0.15s;
+  position: relative;
+}
+.tab:hover { color: var(--text); }
+.tab.u1.active { color: var(--u1c); border-color: var(--u1c); background: var(--u1b); }
+.tab.u2.active { color: var(--u2c); border-color: var(--u2c); background: var(--u2b); }
+.tab.u3.active { color: var(--u3c); border-color: var(--u3c); background: var(--u3b); }
+.tab.u4.active { color: var(--u4c); border-color: var(--u4c); background: var(--u4b); }
+.tab.quiz.active { color: var(--qc); border-color: var(--qc); background: var(--qb); }
+.tab.wb.active { color: var(--wb); border-color: var(--wb); background: var(--wl); }
 
-  /* MAIN */
-  main { max-width: 900px; margin: 0 auto; padding: 24px 16px 80px; }
+/* === MAIN === */
+main { max-width: 900px; margin: 0 auto; padding: 28px 16px 80px; }
+.panel { display: none; }
+.panel.active { display: block; animation: slideUp 0.25s ease; }
+@keyframes slideUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
 
-  .panel { display: none; }
-  .panel.active { display: block; animation: fadeIn 0.2s ease; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+/* === UNIT BANNER === */
+.unit-banner {
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin-bottom: 24px;
+  display: flex; align-items: flex-start; gap: 20px;
+  position: relative; overflow: hidden;
+}
+.unit-banner::after {
+  content: attr(data-emoji);
+  position: absolute; right: 20px; bottom: -10px;
+  font-size: 5rem; opacity: 0.12; line-height: 1;
+}
+.unit-number {
+  font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  margin-bottom: 4px; opacity: 0.7;
+}
+.unit-banner h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; line-height: 1.2; }
+.unit-banner p { font-size: 0.78rem; margin-top: 6px; opacity: 0.7; }
 
-  /* UNIT HEADER */
-  .unit-header {
-    border-radius: var(--radius);
-    padding: 20px 22px;
-    margin-bottom: 22px;
-    position: relative;
-    overflow: hidden;
-  }
-  .unit-header::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    opacity: 0.08;
-  }
-  .u1-bg { background: linear-gradient(135deg, #7c6af520, #7c6af508); border: 1px solid #7c6af530; }
-  .u2-bg { background: linear-gradient(135deg, #e86f4a20, #e86f4a08); border: 1px solid #e86f4a30; }
-  .u3-bg { background: linear-gradient(135deg, #3dbf8a20, #3dbf8a08); border: 1px solid #3dbf8a30; }
-  .u4-bg { background: linear-gradient(135deg, #f0b42920, #f0b42908); border: 1px solid #f0b42930; }
-  .unit-label {
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-    opacity: 0.8;
-  }
-  .unit-header h2 { font-family: 'DM Serif Display', serif; font-size: 1.4rem; }
-  .unit-header p { font-size: 0.82rem; color: var(--muted); margin-top: 4px; }
+/* === SECTIONS === */
+.section {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.15s;
+}
+.section:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.1); }
+.section-head {
+  padding: 16px 20px;
+  cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center;
+  user-select: none;
+  transition: background 0.15s;
+}
+.section-head:hover { background: #faf8ff; }
+.section-head h3 {
+  font-size: 0.88rem; font-weight: 700;
+  display: flex; align-items: center; gap: 10px;
+}
+.tag {
+  font-size: 0.62rem; font-weight: 700; padding: 3px 8px;
+  border-radius: 6px; letter-spacing: 0.05em; text-transform: uppercase;
+}
+.chevron {
+  font-size: 0.65rem; color: var(--muted);
+  transition: transform 0.2s; flex-shrink: 0;
+}
+.section.open .chevron { transform: rotate(180deg); }
+.section-body { display: none; padding: 4px 20px 20px; }
+.section.open .section-body { display: block; }
 
-  /* SECTION */
-  .section {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    margin-bottom: 14px;
-    overflow: hidden;
-  }
-  .section-head {
-    padding: 14px 18px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    user-select: none;
-    transition: background 0.1s;
-  }
-  .section-head:hover { background: var(--surface2); }
-  .section-head h3 {
-    font-size: 0.9rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .badge {
-    font-size: 0.65rem;
-    font-weight: 700;
-    padding: 2px 7px;
-    border-radius: 20px;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
-  .b1 { background: #7c6af520; color: var(--u1); }
-  .b2 { background: #e86f4a20; color: var(--u2); }
-  .b3 { background: #3dbf8a20; color: var(--u3); }
-  .b4 { background: #f0b42920; color: var(--u4); }
-  .chevron { font-size: 0.7rem; color: var(--muted); transition: transform 0.2s; }
-  .section.open .chevron { transform: rotate(180deg); }
-  .section-body { display: none; padding: 0 18px 18px; }
-  .section.open .section-body { display: block; }
+/* === CONTENT ELEMENTS === */
+.def-box {
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin: 14px 0;
+  font-size: 0.84rem;
+  border-left: 4px solid;
+  font-style: italic;
+}
 
-  /* CONTENT STYLES */
-  .def-box {
-    background: var(--surface2);
-    border-left: 3px solid var(--u1);
-    border-radius: 0 8px 8px 0;
-    padding: 12px 16px;
-    margin: 12px 0;
-    font-size: 0.85rem;
-    font-style: italic;
-    color: #c5c0d8;
-  }
-  .def-box.orange { border-color: var(--u2); }
-  .def-box.green { border-color: var(--u3); }
-  .def-box.yellow { border-color: var(--u4); }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin: 14px 0; }
+@media(max-width:600px) { .grid2,.grid3 { grid-template-columns: 1fr; } }
 
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
-  @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } }
+.card {
+  border-radius: 12px;
+  padding: 14px 16px;
+  border: 1.5px solid;
+}
+.card h4 { font-size: 0.8rem; font-weight: 700; margin-bottom: 8px; }
+.card ul { padding-left: 16px; font-size: 0.8rem; }
+.card ul li { margin-bottom: 3px; }
 
-  .card {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 12px 14px;
-  }
-  .card h4 { font-size: 0.8rem; font-weight: 600; margin-bottom: 6px; }
-  .card ul { padding-left: 16px; font-size: 0.82rem; color: #b8b4cc; }
-  .card ul li { margin-bottom: 3px; }
+h4.sub { font-size: 0.85rem; font-weight: 700; margin: 18px 0 8px; }
+p.note { font-size: 0.82rem; color: #555; margin: 6px 0; line-height: 1.6; }
+ul.clean { padding-left: 18px; font-size: 0.82rem; margin: 8px 0; }
+ul.clean li { margin-bottom: 5px; }
 
-  .kw { color: var(--text); font-weight: 600; }
+table { width: 100%; border-collapse: collapse; font-size: 0.8rem; margin: 12px 0; border-radius: 10px; overflow: hidden; }
+th { padding: 10px 14px; text-align: left; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase; }
+td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { filter: brightness(0.97); }
 
-  table { width: 100%; border-collapse: collapse; font-size: 0.8rem; margin: 12px 0; }
-  th { background: var(--surface2); padding: 8px 12px; text-align: left; font-weight: 600; font-size: 0.75rem; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; }
-  td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
-  tr:last-child td { border-bottom: none; }
-  tr:hover td { background: var(--surface2); }
+.pill-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+.pill {
+  font-size: 0.73rem; font-weight: 500;
+  padding: 4px 12px; border-radius: 20px;
+  border: 1.5px solid var(--border);
+  background: white; color: var(--muted);
+}
+.divider { height: 1px; background: var(--border); margin: 16px 0; }
+.kw { font-weight: 700; }
 
-  .pill-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
-  .pill {
-    font-size: 0.75rem;
-    font-weight: 500;
-    padding: 4px 10px;
-    border-radius: 20px;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    color: var(--muted);
-  }
-  .pill.highlight { background: #7c6af518; border-color: #7c6af540; color: var(--u1); }
+/* === SVG DIAGRAM CONTAINERS === */
+.diagram-wrap {
+  background: white;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin: 14px 0;
+  overflow-x: auto;
+  text-align: center;
+}
+.diagram-wrap svg { max-width: 100%; height: auto; }
+.diagram-label {
+  font-size: 0.7rem; font-weight: 600; color: var(--muted);
+  text-align: center; margin-top: 8px; letter-spacing: 0.05em; text-transform: uppercase;
+}
 
-  h4.sub { font-size: 0.85rem; font-weight: 600; margin: 14px 0 6px; color: var(--text); }
-  p.note { font-size: 0.82rem; color: var(--muted); margin: 6px 0; }
-  ul.clean { padding-left: 18px; font-size: 0.83rem; color: #b8b4cc; margin: 6px 0; }
-  ul.clean li { margin-bottom: 4px; }
+/* === HORSEMEN === */
+.horseman {
+  border-radius: 10px; padding: 12px 16px;
+  margin: 8px 0; border: 1.5px solid;
+  font-size: 0.82rem;
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.horseman-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+.horseman strong { display: block; font-size: 0.85rem; margin-bottom: 3px; }
 
-  .horseman {
-    border-radius: 8px;
-    padding: 12px 14px;
-    margin: 8px 0;
-    border: 1px solid;
-    font-size: 0.83rem;
-  }
-  .horseman strong { display: block; font-size: 0.85rem; margin-bottom: 4px; }
-  .h-red { background: #e84a4a10; border-color: #e84a4a30; }
-  .h-red strong { color: #e84a4a; }
-  .h-orange { background: #e86f4a10; border-color: #e86f4a30; }
-  .h-orange strong { color: var(--u2); }
-  .h-blue { background: #4a7ae810; border-color: #4a7ae830; }
-  .h-blue strong { color: #7aacf5; }
-  .h-gray { background: #88888810; border-color: #88888830; }
-  .h-gray strong { color: #aaa; }
+/* === QUIZ === */
+.quiz-banner {
+  background: linear-gradient(135deg, var(--qc), #2a5a9f);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin-bottom: 22px;
+  color: white; position: relative; overflow: hidden;
+}
+.quiz-banner::after { content:'🎯'; position:absolute; right:20px; bottom:-10px; font-size:5rem; opacity:0.15; }
+.quiz-banner h2 { font-family:'Playfair Display',serif; font-size:1.4rem; }
+.quiz-banner p { font-size:0.8rem; opacity:0.75; margin-top:4px; }
+.quiz-controls { display:flex; gap:10px; margin-top:14px; flex-wrap:wrap; }
 
-  /* QUIZ */
-  .quiz-header {
-    background: linear-gradient(135deg, #e84a7a18, #e84a7a08);
-    border: 1px solid #e84a7a30;
-    border-radius: var(--radius);
-    padding: 20px 22px;
-    margin-bottom: 22px;
-  }
-  .quiz-header h2 { font-family: 'DM Serif Display', serif; font-size: 1.4rem; }
-  .quiz-header p { font-size: 0.82rem; color: var(--muted); margin-top: 4px; }
-  .quiz-controls { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
-  .btn {
-    padding: 8px 16px;
-    border-radius: 8px;
-    border: none;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: opacity 0.1s;
-  }
-  .btn:hover { opacity: 0.85; }
-  .btn-quiz { background: var(--quiz); color: white; }
-  .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--muted); }
+.btn {
+  padding: 9px 20px; border-radius: 8px; border: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.8rem; font-weight: 700; cursor: pointer;
+  transition: all 0.15s;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-start { background: white; color: var(--qc); }
+.btn-reset { background: rgba(255,255,255,0.15); color: white; border: 1.5px solid rgba(255,255,255,0.3); }
 
-  .q-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 18px;
-    margin-bottom: 12px;
-  }
-  .q-num { font-size: 0.7rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
-  .q-text { font-size: 0.9rem; font-weight: 500; margin-bottom: 14px; line-height: 1.5; }
-  .options { display: flex; flex-direction: column; gap: 7px; }
-  .opt {
-    padding: 10px 14px;
-    border-radius: 8px;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    cursor: pointer;
-    font-size: 0.83rem;
-    transition: all 0.1s;
-    text-align: left;
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-  }
-  .opt:hover:not(:disabled) { border-color: var(--quiz); background: #e84a7a10; }
-  .opt.correct { background: #3dbf8a18; border-color: #3dbf8a60; color: #3dbf8a; }
-  .opt.wrong { background: #e84a4a18; border-color: #e84a4a60; color: #e84a4a; }
-  .opt:disabled { cursor: default; }
-  .explanation {
-    margin-top: 12px;
-    padding: 10px 14px;
-    background: var(--surface2);
-    border-radius: 8px;
-    font-size: 0.8rem;
-    color: var(--muted);
-    display: none;
-  }
-  .explanation.show { display: block; }
-  .score-box {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 28px;
-    text-align: center;
-    display: none;
-  }
-  .score-box h3 { font-family: 'DM Serif Display', serif; font-size: 1.8rem; margin-bottom: 6px; }
-  .score-box .score { font-size: 3rem; font-weight: 700; color: var(--quiz); }
-  .score-box p { color: var(--muted); font-size: 0.85rem; margin-top: 8px; }
+.q-card {
+  background: var(--card); border: 1.5px solid var(--border);
+  border-radius: var(--radius); padding: 20px;
+  margin-bottom: 14px; box-shadow: var(--shadow);
+}
+.q-tag { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+.q-text { font-size: 0.92rem; font-weight: 600; margin-bottom: 16px; line-height: 1.5; color: var(--text); }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.opt {
+  padding: 11px 16px; border-radius: 10px;
+  background: var(--bg); border: 1.5px solid var(--border);
+  cursor: pointer; font-size: 0.82rem; text-align: left;
+  color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: all 0.12s; font-weight: 500;
+}
+.opt:hover:not(:disabled) { background: var(--ql); border-color: var(--qm); color: var(--qc); transform: translateX(3px); }
+.opt.correct { background: #e8f8f0; border-color: #4aac7d; color: #1a6b4a; font-weight: 700; }
+.opt.correct::before { content: '✓ '; }
+.opt.wrong { background: #fdecea; border-color: #e07060; color: #c0392b; font-weight: 700; }
+.opt.wrong::before { content: '✗ '; }
+.opt:disabled { cursor: default; }
+.exp-box {
+  margin-top: 12px; padding: 12px 16px;
+  border-radius: 10px; background: var(--ql);
+  border-left: 3px solid var(--qm);
+  font-size: 0.8rem; color: var(--qc); display: none;
+}
+.exp-box.show { display: block; }
 
-  .divider { height: 1px; background: var(--border); margin: 14px 0; }
+.progress-wrap { height: 6px; background: var(--border); border-radius: 20px; margin: 12px 0; }
+.progress-bar { height: 100%; border-radius: 20px; background: linear-gradient(90deg, var(--qm), var(--qc)); transition: width 0.4s; }
 
-  /* Progress */
-  .progress-bar { background: var(--surface2); border-radius: 20px; height: 4px; margin-top: 8px; }
-  .progress-fill { height: 100%; border-radius: 20px; background: var(--quiz); transition: width 0.3s; }
+.score-card {
+  background: var(--card); border: 2px solid var(--qm);
+  border-radius: var(--radius); padding: 36px; text-align: center;
+  display: none; box-shadow: 0 8px 32px rgba(26,63,107,0.15);
+}
+.score-card h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 4px; }
+.big-score { font-size: 3.5rem; font-weight: 800; background: linear-gradient(135deg, var(--qc), var(--qm)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.score-msg { color: var(--muted); font-size: 0.85rem; margin-top: 8px; }
+.score-badge { display: inline-block; background: var(--ql); color: var(--qc); border-radius: 20px; padding: 4px 14px; font-size: 0.8rem; font-weight: 700; margin-top: 10px; }
+
+/* === WORKBOOK === */
+.wb-banner {
+  background: linear-gradient(135deg, #2d2440, #4a3060);
+  border-radius: var(--radius); padding: 24px 28px;
+  margin-bottom: 22px; color: white; position: relative; overflow: hidden;
+}
+.wb-banner::after { content:'📓'; position:absolute; right:20px; bottom:-10px; font-size:5rem; opacity:0.15; }
+.wb-banner h2 { font-family:'Playfair Display',serif; font-size:1.4rem; }
+.wb-banner p { font-size:0.8rem; opacity:0.75; margin-top:4px; }
+
+.wb-section {
+  background: white; border: 1.5px solid var(--border);
+  border-radius: var(--radius); margin-bottom: 16px;
+  overflow: hidden; box-shadow: var(--shadow);
+}
+.wb-head {
+  padding: 16px 20px; display: flex; align-items: center;
+  gap: 12px; border-bottom: 1px solid var(--border);
+}
+.wb-head .wb-icon { font-size: 1.4rem; }
+.wb-head h3 { font-size: 0.9rem; font-weight: 700; }
+.wb-head p { font-size: 0.75rem; color: var(--muted); margin-top: 1px; }
+.wb-body { padding: 20px; }
+
+.wb-q { margin-bottom: 18px; }
+.wb-q label { display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 8px; color: var(--text); }
+.wb-input {
+  width: 100%; padding: 10px 14px; border-radius: 8px;
+  border: 1.5px solid var(--border); font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.83rem; resize: vertical; background: #faf8f5;
+  transition: border-color 0.15s; color: var(--text);
+}
+.wb-input:focus { outline: none; border-color: #9c7cc4; background: white; }
+.wb-input.small { min-height: 44px; resize: none; }
+.wb-input.medium { min-height: 80px; }
+
+.wb-reveal-btn {
+  font-size: 0.75rem; font-weight: 600; padding: 5px 12px;
+  border-radius: 6px; border: none; cursor: pointer;
+  background: var(--wl); color: var(--wb);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: all 0.12s;
+}
+.wb-reveal-btn:hover { background: #e8dcff; }
+.wb-answer {
+  margin-top: 8px; padding: 10px 14px; border-radius: 8px;
+  background: #f3f0fb; border-left: 3px solid #9c7cc4;
+  font-size: 0.8rem; color: #4a2d70; display: none;
+}
+.wb-answer.show { display: block; }
+
+.fill-blanks { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 0.85rem; }
+.blank-input {
+  display: inline-block; min-width: 100px; padding: 4px 10px;
+  border: none; border-bottom: 2px solid #9c7cc4;
+  background: transparent; font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.85rem; color: #4a2d70; text-align: center;
+}
+.blank-input:focus { outline: none; border-bottom-color: #5c3d8f; }
+.fill-check-btn {
+  margin-top: 12px; padding: 8px 18px; border-radius: 8px;
+  border: none; cursor: pointer; background: #5c3d8f; color: white;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.8rem; font-weight: 700;
+  transition: all 0.12s;
+}
+.fill-check-btn:hover { background: #4a2d70; }
+.fill-result { margin-top: 8px; font-size: 0.8rem; font-weight: 600; }
+
+.match-game { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0; }
+.match-col h5 { font-size: 0.75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+.match-item {
+  padding: 8px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 500;
+  cursor: pointer; border: 1.5px solid var(--border); background: var(--bg);
+  transition: all 0.12s; margin-bottom: 6px; user-select: none;
+}
+.match-item:hover { background: var(--wl); border-color: #9c7cc4; }
+.match-item.selected { background: #5c3d8f; color: white; border-color: #5c3d8f; }
+.match-item.matched-correct { background: #e8f8f0; border-color: #4aac7d; color: #1a6b4a; cursor: default; }
+.match-item.matched-wrong { background: #fdecea; border-color: #e07060; color: #c0392b; cursor: default; }
+
+/* ========== UNIT COLORS ========== */
+/* U1 purple */
+.u1-banner { background: linear-gradient(135deg, var(--u1l), #ddd0f8); color: var(--u1c); }
+.u1-def { background: var(--u1l); border-color: var(--u1c); color: #3a2060; }
+.u1-th { background: var(--u1l); color: var(--u1c); }
+.u1-card { background: var(--u1b); border-color: #c4aff0; }
+.u1-tag { background: var(--u1l); color: var(--u1c); }
+tr.u1:hover td { background: var(--u1b); }
+
+/* U2 red */
+.u2-banner { background: linear-gradient(135deg, var(--u2l), #ffd5d0); color: var(--u2c); }
+.u2-def { background: var(--u2l); border-color: var(--u2c); color: #7a2018; }
+.u2-th { background: var(--u2l); color: var(--u2c); }
+.u2-card { background: var(--u2b); border-color: #f0b0a0; }
+.u2-tag { background: var(--u2l); color: var(--u2c); }
+
+/* U3 green */
+.u3-banner { background: linear-gradient(135deg, var(--u3l), #c8f0dc); color: var(--u3c); }
+.u3-def { background: var(--u3l); border-color: var(--u3c); color: #0d4028; }
+.u3-th { background: var(--u3l); color: var(--u3c); }
+.u3-card { background: var(--u3b); border-color: #90d8b4; }
+.u3-tag { background: var(--u3l); color: var(--u3c); }
+
+/* U4 orange */
+.u4-banner { background: linear-gradient(135deg, var(--u4l), #ffdcb8); color: var(--u4c); }
+.u4-def { background: var(--u4l); border-color: var(--u4c); color: #7a3800; }
+.u4-th { background: var(--u4l); color: var(--u4c); }
+.u4-card { background: var(--u4b); border-color: #f0c090; }
+.u4-tag { background: var(--u4l); color: var(--u4c); }
+
+/* flowchart steps */
+.flow-steps { display: flex; flex-wrap: wrap; gap: 0; align-items: center; margin: 12px 0; }
+.flow-step {
+  border-radius: 10px; padding: 10px 14px; font-size: 0.78rem; font-weight: 600;
+  text-align: center; min-width: 90px; flex: 1;
+}
+.flow-arrow { font-size: 1.2rem; color: var(--muted); padding: 0 4px; flex-shrink: 0; }
+@media(max-width:600px) { .flow-steps { flex-direction: column; } .flow-arrow { transform: rotate(90deg); } }
+
+/* stage badges */
+.stages { display: flex; flex-direction: column; gap: 8px; margin: 12px 0; }
+.stage-row { display: flex; align-items: stretch; gap: 10px; }
+.stage-num { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800; flex-shrink: 0; margin-top: 2px; }
+.stage-content { flex: 1; }
+.stage-label { font-size: 0.82rem; font-weight: 700; }
+.stage-desc { font-size: 0.77rem; color: var(--muted); }
+.stage-time { font-size: 0.7rem; font-weight: 600; border-radius: 20px; padding: 2px 8px; margin-left: 6px; }
+@media(max-width:600px) {
+  .header-controls { position: static; margin-bottom: 10px; }
+}
 </style>
 </head>
 <body>
 
 <header>
   <div class="header-inner">
+    <div class="header-controls">
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙 Dark</button>
+    </div>
     <h1>Counselling Across Groups</h1>
-    <p>6th Semester · 4 Units · Interactive Exam Prep</p>
+    <p>6th Semester · Interactive Exam Preparation</p>
+    <div class="header-tags">
+      <span class="htag">4 Units</span>
+      <span class="htag">25-Q Quiz</span>
+      <span class="htag">Diagrams</span>
+      <span class="htag">Workbook</span>
+    </div>
   </div>
 </header>
 
 <nav>
   <div class="nav-inner">
-    <button class="tab active" data-tab="u1">Unit 1 · Intro & Ethics</button>
-    <button class="tab" data-tab="u2">Unit 2 · Marital & Grief</button>
-    <button class="tab" data-tab="u3">Unit 3 · Addictions</button>
-    <button class="tab" data-tab="u4">Unit 4 · Testing & Assessment</button>
-    <button class="tab" data-tab="quiz">🎯 Quiz</button>
+    <button class="tab u1 active" data-tab="u1">🔮 Unit 1 · Intro & Ethics</button>
+    <button class="tab u2" data-tab="u2">❤️ Unit 2 · Marital & Grief</button>
+    <button class="tab u3" data-tab="u3">🌿 Unit 3 · Addictions</button>
+    <button class="tab u4" data-tab="u4">📊 Unit 4 · Testing</button>
+    <button class="tab quiz" data-tab="quiz">🎯 Quiz</button>
+    <button class="tab wb" data-tab="wb">📓 Workbook</button>
   </div>
 </nav>
 
 <main>
 
-<!-- ═══════════════ UNIT 1 ═══════════════ -->
+<!-- ════════════════════════ UNIT 1 ════════════════════════ -->
 <div class="panel active" id="u1">
-  <div class="unit-header u1-bg">
-    <div class="unit-label" style="color:var(--u1)">Unit 1</div>
-    <h2>Introduction to Group Counselling & Ethics</h2>
-    <p>Group types · Operational practices · Ethics · Mental Health Care Act 2017</p>
+  <div class="unit-banner u1-banner" data-emoji="🔮">
+    <div>
+      <div class="unit-number">Unit 1</div>
+      <h2>Introduction to Group Counselling & Ethics</h2>
+      <p>Group types · Operational practices · Ethical principles · Mental Health Care Act 2017</p>
+    </div>
   </div>
 
-  <!-- GROUP COUNSELLING -->
+  <!-- DEFINITION -->
   <div class="section open">
-    <div class="section-head" onclick="toggle(this)">
-      <h3><span class="badge b1">Core</span> What is Group Counselling?</h3>
+    <div class="section-head" onclick="tog(this)">
+      <h3><span class="tag u1-tag">Core Concept</span> What is Group Counselling?</h3>
       <span class="chevron">▼</span>
     </div>
     <div class="section-body">
-      <div class="def-box">Gazda's Definition: Group counselling is a <strong>dynamic interpersonal process</strong> focusing on conscious thought and behaviours, involving permissiveness, reality orientation, catharsis, and mutual trust — carried out in a small group setting through sharing personal concerns with peers and the counsellor.</div>
-      <h4 class="sub">Benefits of Groups</h4>
-      <div class="grid-2">
-        <div class="card">
-          <h4 style="color:var(--u1)">Why Groups Work</h4>
+      <div class="def-box u1-def"><strong>Gazda's Definition:</strong> Group counselling is a <em>dynamic interpersonal process</em> focusing on <strong>conscious thought and behaviours</strong>, involving permissiveness, reality orientation, catharsis, and mutual trust — nurtured in a small group through sharing personal concerns with peers and the counsellor.</div>
+      <div class="grid2">
+        <div class="card u1-card">
+          <h4 style="color:var(--u1c)">✨ Why Groups Work</h4>
           <ul>
             <li>Natural tendency to gather & cooperate</li>
             <li>Sense of belonging</li>
-            <li>Shared common problems</li>
             <li>Observe behaviour in others</li>
+            <li>Find support for self-exploration</li>
             <li>Develop social bonds</li>
           </ul>
         </div>
-        <div class="card">
-          <h4 style="color:var(--u1)">Primary Goals</h4>
+        <div class="card u1-card">
+          <h4 style="color:var(--u1c)">🎯 Primary Goals</h4>
           <ul>
-            <li>1 counsellor → 4–12 counselees</li>
+            <li>1 counsellor → <strong>4–12</strong> counselees</li>
             <li>Create interpersonal helping climate</li>
             <li>Insight + healthier personal adjustment</li>
-            <li>Essentially preventive in nature</li>
+            <li><em>Preventive</em> in nature (not curative)</li>
             <li>Problem-centred & feeling-oriented</li>
           </ul>
         </div>
       </div>
-      <div class="divider"></div>
-      <h4 class="sub">Advantages & Limitations</h4>
-      <div class="grid-2">
-        <div class="card">
-          <h4 style="color:#3dbf8a">✓ Advantages</h4>
+
+      <h4 class="sub">⚖️ Advantages vs Limitations</h4>
+      <div class="grid2">
+        <div class="card" style="background:#e8f8f0;border-color:#4aac7d">
+          <h4 style="color:#1a6b4a">✓ Advantages</h4>
           <ul>
-            <li>Spreads counsellor's effect to many</li>
+            <li>Spreads counsellor's effect efficiently</li>
             <li>Less threatening than individual therapy</li>
-            <li>Peer suggestions more accepted</li>
+            <li>Peer suggestions more readily accepted</li>
             <li>Realistic social interaction practice</li>
           </ul>
         </div>
-        <div class="card">
-          <h4 style="color:#e84a4a">✗ Limitations</h4>
+        <div class="card" style="background:#fdecea;border-color:#e07060">
+          <h4 style="color:#c0392b">✗ Limitations</h4>
           <ul>
-            <li>Counsellor contact with each is diluted</li>
-            <li>Individual problems may become secondary</li>
+            <li>Individual contact is diluted</li>
+            <li>Personal problems may become secondary</li>
             <li>Peer presence can be a barrier for some</li>
-            <li>Unknown: what concerns need individual vs. group</li>
+            <li>Unknown: group vs individual suitability</li>
           </ul>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- TYPES OF GROUPS -->
+  <!-- 6 TYPES -->
   <div class="section">
-    <div class="section-head" onclick="toggle(this)">
-      <h3><span class="badge b1">Key</span> 6 Types of Groups</h3>
+    <div class="section-head" onclick="tog(this)">
+      <h3><span class="tag u1-tag">Must Know</span> 6 Types of Groups</h3>
       <span class="chevron">▼</span>
     </div>
     <div class="section-body">
+
+      <!-- VISUAL DIAGRAM -->
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:220px">
+          <!-- background blobs -->
+          <rect x="0" y="0" width="760" height="220" fill="#faf8f5" rx="10"/>
+          <!-- boxes -->
+          <g>
+            <!-- T Group -->
+            <rect x="10" y="80" width="110" height="60" rx="10" fill="#ede7f6" stroke="#9c7cc4" stroke-width="1.5"/>
+            <text x="65" y="107" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="11" font-weight="700" fill="#5c3d8f">T Groups</text>
+            <text x="65" y="122" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" fill="#7a5aa0">Training (1947)</text>
+            <text x="65" y="135" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" fill="#7a5aa0">10–12 members</text>
+            <!-- Personal Growth -->
+            <rect x="140" y="40" width="110" height="60" rx="10" fill="#fdecea" stroke="#e07060" stroke-width="1.5"/>
+            <text x="195" y="65" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="11" font-weight="700" fill="#c0392b">Personal Growth</text>
+            <text x="195" y="80" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" fill="#a03020">8–12 members</text>
+            <text x="195" y="93" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" fill="#a03020">Encounter/Sensitivity</text>
+            <!-- Family Consult -->
+            <rect x="270" y="80" width="110" height="60" rx="10" fill="#e6f4ee" stroke="#4aac7d" stroke-width="1.5"/>
+            <text x="325" y="105" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="11" font-weight="700" fill="#1a6b4a">Family Group</text>
+            <text x="325" y="119" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" fill="#2a8055">Consultation</text>
+            <text x="325" y="132" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" fill="#2a8055">3–4 families</text>
+            <!-- Group Therapy -->
+            <rect x="400" y="40" width="110" height="60" rx="10" fill="#fff3e6" stroke="#e08040" stroke-width="1.5"/>
+            <text x="455" y="65" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="11" font-weight="700" fill="#b5590a">Group Therapy</text>
+            <text x="455" y="80" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" fill="#905018">Disturbed clients</text>
+            <text x="455" y="93" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" fill="#905018">Deeper problems</text>
+            <!-- Special -->
+            <rect x="530" y="80" width="110" height="60" rx="10" fill="#e6eef8" stroke="#4a7cc4" stroke-width="1.5"/>
+            <text x="585" y="107" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="11" font-weight="700" fill="#1a3f6b">Special Groups</text>
+            <text x="585" y="121" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" fill="#2a5090">e.g., AA</text>
+            <text x="585" y="134" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" fill="#2a5090">Lay-created</text>
+            <!-- Marathon -->
+            <rect x="650" y="130" width="100" height="60" rx="10" fill="#f5f0ff" stroke="#9c7cc4" stroke-width="1.5"/>
+            <text x="700" y="157" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="11" font-weight="700" fill="#4a2d70">Marathon</text>
+            <text x="700" y="171" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" fill="#6a4d90">15–20 hrs</text>
+            <text x="700" y="184" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" fill="#6a4d90">Saturation</text>
+          </g>
+          <text x="380" y="200" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="10" fill="#aaa">6 Types of Counselling Groups</text>
+        </svg>
+      </div>
+
+      <div class="def-box u1-def" style="margin-top:8px">⚡ <strong>T Groups vs Therapy Groups:</strong> T Groups assume participants are <strong>well</strong>, focus on <strong>conscious/preconscious</strong> behaviour only (not unconscious), and use present data — NOT genetic causes.</div>
+
       <table>
-        <tr><th>Type</th><th>Key Feature</th><th>Details</th></tr>
-        <tr>
-          <td><span class="kw">T Groups</span><br><small style="color:var(--muted)">Training</small></td>
-          <td>Learning lab</td>
-          <td>Formulated 1947; unstructured 10–12 people; learn from behaviour; focuses on conscious/preconscious (not unconscious); assumes participants are well</td>
-        </tr>
-        <tr>
-          <td><span class="kw">Personal Growth Groups</span><br><small style="color:var(--muted)">Encounter / Sensitivity</small></td>
-          <td>Member interaction</td>
-          <td>8–12 members; facilitates personal growth, self-awareness; often led by trained psychotherapists</td>
-        </tr>
-        <tr>
-          <td><span class="kw">Family Group Consultation</span></td>
-          <td>3–4 families</td>
-          <td>Up to 20 individuals; 2 hours — 1st: all together, 2nd: adults & children separate; overcomes "poverty of understanding"</td>
-        </tr>
-        <tr>
-          <td><span class="kw">Group Therapy</span></td>
-          <td>More disturbed clients</td>
-          <td>Deeper personality problems; uses 4 characteristics (Hinckley & Hermann); video playback increasingly used</td>
-        </tr>
-        <tr>
-          <td><span class="kw">Special Therapy Groups</span><br><small style="color:var(--muted)">e.g., AA</small></td>
-          <td>Lay-created</td>
-          <td>Not created by therapists; reflects loss of confidence in professional treatment; laymen creating new social institutions</td>
-        </tr>
-        <tr>
-          <td><span class="kw">Marathon Groups</span></td>
-          <td>Saturation sessions</td>
-          <td>15–20 hours continuous; members explore views, relationships, aspirations; authentic self-responsible behaviour</td>
-        </tr>
+        <tr><th class="u1-th">Type</th><th class="u1-th">Key Distinction</th><th class="u1-th">Size / Detail</th></tr>
+        <tr><td><span class="kw" style="color:var(--u1c)">T Groups</span></td><td>Learning lab; present behaviour; well participants</td><td>10–12 (unstructured)</td></tr>
+        <tr><td><span class="kw" style="color:var(--u2c)">Personal Growth</span></td><td>Encounter/sensitivity; personal growth & self-awareness</td><td>8–12</td></tr>
+        <tr><td><span class="kw" style="color:var(--u3c)">Family Group Consultation</span></td><td>Overcomes "poverty of understanding"; 2-part session</td><td>3–4 families (≤20 people)</td></tr>
+        <tr><td><span class="kw" style="color:var(--u4c)">Group Therapy</span></td><td>More disturbed; deeper personality problems; video playback</td><td>Led by psychiatrists/psychologists</td></tr>
+        <tr><td><span class="kw" style="color:var(--qc)">Special Therapy</span></td><td>Lay-created (e.g., AA); reflects loss of confidence in professional treatment</td><td>No set size</td></tr>
+        <tr><td><span class="kw" style="color:#6a4d90">Marathon Groups</span></td><td>Saturation sessions; authentic self-responsible behaviour</td><td>15–20 hrs continuous</td></tr>
       </table>
-      <div class="def-box">⚡ T Groups vs Therapy Groups: T groups deal with <strong>conscious/preconscious</strong> behaviour using present data — not unconscious motivation. They assume participants are <strong>well</strong>.</div>
     </div>
   </div>
 
   <!-- OPERATIONAL PRACTICES -->
   <div class="section">
-    <div class="section-head" onclick="toggle(this)">
-      <h3><span class="badge b1">Ops</span> Operational Practices</h3>
+    <div class="section-head" onclick="tog(this)">
+      <h3><span class="tag u1-tag">Operations</span> Operational Practices</h3>
       <span class="chevron">▼</span>
     </div>
     <div class="section-body">
-      <div class="grid-2">
-        <div class="card">
-          <h4>Selecting Members</h4>
-          <ul>
-            <li>Must want help & be willing to talk</li>
-            <li>Mix of ages & sexes is desirable</li>
-            <li>Interview each potential member first</li>
-            <li><em>Exclude:</em> very aggressive, extremely shy, seriously maladjusted</li>
-            <li>Avoid close friends/relatives in same group</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h4>Size & Frequency</h4>
-          <ul>
-            <li>Size: <strong>6–8</strong> or up to 10–12</li>
-            <li>Adolescents: <strong>1–1.5 hrs</strong></li>
-            <li>Children: <strong>30–45 mins</strong></li>
-            <li>1 week gap between sessions (ideal)</li>
-            <li>Max 2–3 hrs/week before productivity drops</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h4>Closed vs. Continuous</h4>
-          <ul>
-            <li><strong>Closed:</strong> only original members</li>
-            <li><strong>Continuous:</strong> others can join at any stage</li>
-            <li>Open policy creates communication/acceptance issues</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h4>Member Roles (3 Categories)</h4>
-          <ul>
-            <li><strong>Group Task Roles</strong> (1–12): Initiator, Info Seeker, Elaborator, Recorder…</li>
-            <li><strong>Group Growing Roles</strong> (13–19): Encourager, Harmonizer, Gatekeeper…</li>
-            <li><strong>Anti-group Roles</strong> (20–27): Aggressor, Blocker, Dominator…</li>
-          </ul>
-        </div>
+      <div class="grid2">
+        <div class="card u1-card"><h4 style="color:var(--u1c)">👥 Selecting Members</h4><ul>
+          <li>Must want help & willing to talk</li>
+          <li>Mix of ages & sexes desirable</li>
+          <li>Interview each member first</li>
+          <li><strong>Exclude:</strong> very aggressive, extremely shy, seriously maladjusted</li>
+          <li>No close friends/relatives together</li>
+        </ul></div>
+        <div class="card u1-card"><h4 style="color:var(--u1c)">⏱️ Size & Frequency</h4><ul>
+          <li>Size: <strong>6–8</strong> (up to 10–12)</li>
+          <li>Adolescents: <strong>1–1.5 hrs/session</strong></li>
+          <li>Children: <strong>30–45 mins/session</strong></li>
+          <li>Ideal: 1 week gap between sessions</li>
+          <li>Max 2–3 hrs/week before productivity drops</li>
+        </ul></div>
       </div>
-      <h4 class="sub">Role Playing</h4>
-      <p class="note">Useful especially with adolescents. Counsellor must explain & demonstrate first. Misuse can cause trauma if threatening material is externalised prematurely. Works best when: client struggles to describe a situation, wants to know how others perceive them, or needs social skill practice.</p>
+      <h4 class="sub">🎭 Member Roles (3 Categories)</h4>
+      <div class="grid3">
+        <div class="card" style="background:#e6f4ee;border-color:#4aac7d"><h4 style="color:#1a6b4a">Group Task Roles (1–12)</h4><ul>
+          <li>Initiator-contributor</li><li>Information seeker/giver</li><li>Elaborator</li><li>Coordinator</li><li>Recorder…</li>
+        </ul></div>
+        <div class="card" style="background:var(--u1b);border-color:#c4aff0"><h4 style="color:var(--u1c)">Group Growing Roles (13–19)</h4><ul>
+          <li>Encourager</li><li>Harmonizer</li><li>Gatekeeper</li><li>Standard setter</li><li>Follower…</li>
+        </ul></div>
+        <div class="card" style="background:#fdecea;border-color:#e07060"><h4 style="color:#c0392b">Anti-group Roles (20–27)</h4><ul>
+          <li>Aggressor</li><li>Blocker</li><li>Recognition seeker</li><li>Dominator</li><li>Playboy…</li>
+        </ul></div>
+      </div>
     </div>
   </div>
 
   <!-- ETHICS -->
   <div class="section">
-    <div class="section-head" onclick="toggle(this)">
-      <h3><span class="badge b1">Ethics</span> Ethics in Counselling</h3>
+    <div class="section-head" onclick="tog(this)">
+      <h3><span class="tag u1-tag">Ethics</span> Ethical Principles — The Big 6</h3>
       <span class="chevron">▼</span>
     </div>
     <div class="section-body">
-      <div class="grid-2">
-        <div class="card">
-          <h4 style="color:var(--u1)">Ethics</h4>
-          <ul><li>Rules prescribed by social/professional systems</li><li>Guide professional practices (counsellor–client)</li></ul>
-        </div>
-        <div class="card">
-          <h4 style="color:var(--u2)">Morals</h4>
-          <ul><li>Individual principles — right vs wrong</li><li>Words: good, bad, ought, should</li></ul>
-        </div>
-        <div class="card">
-          <h4 style="color:var(--u3)">Law</h4>
-          <ul><li>Codification of governing standards</li><li>Legal ≠ ethical (e.g., past race laws)</li></ul>
-        </div>
-        <div class="card">
-          <h4 style="color:var(--u4)">Confidentiality</h4>
-          <ul><li>Ethical concept (not legal)</li><li>Privileged communication = legal concept</li></ul>
-        </div>
+      <!-- SVG Hexagon diagram -->
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 600 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:260px">
+          <rect width="600" height="260" fill="#faf8f5" rx="10"/>
+          <!-- Six cards in two rows of 3 -->
+          <!-- Row 1 -->
+          <rect x="10" y="20" width="174" height="100" rx="12" fill="#ede7f6" stroke="#9c7cc4" stroke-width="1.5"/>
+          <text x="97" y="52" text-anchor="middle" font-size="20">⚖️</text>
+          <text x="97" y="74" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="12" font-weight="800" fill="#5c3d8f">Autonomy</text>
+          <text x="97" y="90" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9.5" fill="#7a5aa0">Respect client's right</text>
+          <text x="97" y="103" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9.5" fill="#7a5aa0">to self-govern</text>
+
+          <rect x="204" y="20" width="174" height="100" rx="12" fill="#e6f4ee" stroke="#4aac7d" stroke-width="1.5"/>
+          <text x="291" y="52" text-anchor="middle" font-size="20">💚</text>
+          <text x="291" y="74" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="12" font-weight="800" fill="#1a6b4a">Beneficence</text>
+          <text x="291" y="90" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9.5" fill="#2a8055">Act in client's</text>
+          <text x="291" y="103" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9.5" fill="#2a8055">best interest</text>
+
+          <rect x="398" y="20" width="174" height="100" rx="12" fill="#fdecea" stroke="#e07060" stroke-width="1.5"/>
+          <text x="485" y="52" text-anchor="middle" font-size="20">🚫</text>
+          <text x="485" y="74" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="12" font-weight="800" fill="#c0392b">Non-maleficence</text>
+          <text x="485" y="90" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9.5" fill="#a03020">Avoid all forms</text>
+          <text x="485" y="103" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9.5" fill="#a03020">of harm</text>
+
+          <!-- Row 2 -->
+          <rect x="10" y="140" width="174" height="100" rx="12" fill="#fff3e6" stroke="#e08040" stroke-width="1.5"/>
+          <text x="97" y="172" text-anchor="middle" font-size="20">🏛️</text>
+          <text x="97" y="194" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="12" font-weight="800" fill="#b5590a">Justice</text>
+          <text x="97" y="210" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9.5" fill="#905018">Fair, impartial</text>
+          <text x="97" y="223" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9.5" fill="#905018">service to all</text>
+
+          <rect x="204" y="140" width="174" height="100" rx="12" fill="#e6eef8" stroke="#4a7cc4" stroke-width="1.5"/>
+          <text x="291" y="172" text-anchor="middle" font-size="20">🔒</text>
+          <text x="291" y="194" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="12" font-weight="800" fill="#1a3f6b">Confidentiality</text>
+          <text x="291" y="210" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9.5" fill="#2a5090">Ethical concept</text>
+          <text x="291" y="223" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9.5" fill="#2a5090">(≠ privileged comm.)</text>
+
+          <rect x="398" y="140" width="174" height="100" rx="12" fill="#f5f0ff" stroke="#9c7cc4" stroke-width="1.5"/>
+          <text x="485" y="172" text-anchor="middle" font-size="20">🌟</text>
+          <text x="485" y="194" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="12" font-weight="800" fill="#4a2d70">Self-Respect</text>
+          <text x="485" y="210" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9.5" fill="#6a4d90">Counsellor's own</text>
+          <text x="485" y="223" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9.5" fill="#6a4d90">self-care & growth</text>
+        </svg>
       </div>
-
-      <h4 class="sub">6 Ethical Principles (Must Know!)</h4>
-      <table>
-        <tr><th>Principle</th><th>Meaning</th></tr>
-        <tr><td><span class="kw">Autonomy</span></td><td>Respect client's right to be self-governing; voluntary participation; no manipulation</td></tr>
-        <tr><td><span class="kw">Beneficence</span></td><td>Act in client's best interest; update knowledge for professional development</td></tr>
-        <tr><td><span class="kw">Non-Maleficence</span></td><td>Avoid harm — sexual, financial, emotional exploitation</td></tr>
-        <tr><td><span class="kw">Justice</span></td><td>Fair, impartial, equal service; no discrimination</td></tr>
-        <tr><td><span class="kw">Confidentiality</span></td><td>Privacy of client info; distinguish from privileged communication</td></tr>
-        <tr><td><span class="kw">Self-Respect</span></td><td>Counsellor's own self-care, supervision, continued growth</td></tr>
-      </table>
-
-      <h4 class="sub">Common Unethical Behaviours</h4>
-      <div class="pill-row">
-        <span class="pill">Violation of confidentiality</span>
-        <span class="pill">Exceeding competence</span>
-        <span class="pill">Claiming false expertise</span>
-        <span class="pill">Imposing values on client</span>
-        <span class="pill">Creating dependency</span>
-        <span class="pill">Sexual activity with client</span>
-        <span class="pill">Dual relationships</span>
-        <span class="pill">Excessive fees</span>
-        <span class="pill">Plagiarism</span>
-      </div>
-
       <h4 class="sub">ACA Code of Ethics — 9 Sections</h4>
       <table>
-        <tr><th>Section</th><th>Topic</th></tr>
-        <tr><td>A</td><td>Counselling relationship (sexual contact prohibited for 5 years post-termination)</td></tr>
-        <tr><td>B</td><td>Confidentiality & privacy</td></tr>
-        <tr><td>C</td><td>Professional responsibility</td></tr>
-        <tr><td>D</td><td>Relationships with colleagues, employers</td></tr>
-        <tr><td>E</td><td>Evaluation, assessment & interpretation</td></tr>
-        <tr><td>F</td><td>Supervision, training & teaching</td></tr>
-        <tr><td>G</td><td>Research & publications</td></tr>
-        <tr><td>H</td><td>Distance counselling, technology & social media (new)</td></tr>
-        <tr><td>I</td><td>Resolving ethical issues</td></tr>
+        <tr><th class="u1-th">Section</th><th class="u1-th">Topic</th><th class="u1-th">Key Detail</th></tr>
+        <tr><td>A</td><td>Counselling Relationship</td><td>Sexual contact prohibited for <strong>5 years</strong> post-termination</td></tr>
+        <tr><td>B</td><td>Confidentiality & Privacy</td><td>Records, disclosure, consultation</td></tr>
+        <tr><td>C</td><td>Professional Responsibility</td><td>Competence, advertising, non-discrimination</td></tr>
+        <tr><td>D</td><td>Colleague Relationships</td><td>Employers, employees, consultation</td></tr>
+        <tr><td>E</td><td>Evaluation & Assessment</td><td>Test competence, informed consent, multicultural issues</td></tr>
+        <tr><td>F</td><td>Supervision & Teaching</td><td>Supervisory relationships, multicultural diversity</td></tr>
+        <tr><td>G</td><td>Research & Publications</td><td>Research responsibilities, reporting results</td></tr>
+        <tr><td>H</td><td>Technology & Social Media</td><td><strong>New section</strong> — distance counselling, social media, verification</td></tr>
+        <tr><td>I</td><td>Resolving Ethical Issues</td><td>Standards vs law, ethics violations, cooperation</td></tr>
       </table>
     </div>
   </div>
 
-  <!-- MENTAL HEALTH ACT -->
+  <!-- MHCA 2017 -->
   <div class="section">
-    <div class="section-head" onclick="toggle(this)">
-      <h3><span class="badge b1">Law</span> Mental Health Care Act 2017</h3>
+    <div class="section-head" onclick="tog(this)">
+      <h3><span class="tag u1-tag">Indian Law</span> Mental Health Care Act 2017</h3>
       <span class="chevron">▼</span>
     </div>
     <div class="section-body">
-      <div class="def-box">Passed: 7 April 2017 | In force: 7 July 2018 | Superseded: Mental Health Act 1987</div>
+      <div class="def-box u1-def">Passed: <strong>7 April 2017</strong> | In force: <strong>7 July 2018</strong> | Superseded: Mental Health Act 1987 (passed 22 May 1987)</div>
       <h4 class="sub">10 Rights under MHCA 2017</h4>
-      <table>
-        <tr><th>#</th><th>Right</th><th>Key Detail</th></tr>
-        <tr><td>1</td><td>Advance Directive</td><td>Right to state how to be treated; appoint a nominee</td></tr>
-        <tr><td>2</td><td>Access Healthcare</td><td>Affordable, quality, geographically accessible services; no discrimination</td></tr>
-        <tr><td>3</td><td>Free Healthcare</td><td>For BPL/homeless/destitute; free Essential Drugs</td></tr>
-        <tr><td>4</td><td>Live in Community</td><td>Cannot be secluded; mother with child under 3 cannot be separated (unless risk of harm)</td></tr>
-        <tr><td>5</td><td>Protection from Cruel Treatment</td><td>Right to dignity (Article 21); safe & hygienic environment</td></tr>
-        <tr><td>6</td><td>No Prohibited Treatment</td><td>ECT completely banned for children; anaesthesia required for adults</td></tr>
-        <tr><td>7</td><td>Equality & Non-Discrimination</td><td>Equal treatment with physically ill patients</td></tr>
-        <tr><td>8</td><td>Right to Information</td><td>Informed consent; understand treatment in accessible language</td></tr>
-        <tr><td>9</td><td>Confidentiality</td><td>Includes digital/electronic form; exceptions for public safety</td></tr>
-        <tr><td>10</td><td>Legal Aid & Complaint</td><td>Article 39A; right to complain about deficiencies</td></tr>
-      </table>
+      <div class="stages">
+        <div class="stage-row"><div class="stage-num" style="background:var(--u1l);color:var(--u1c)">1</div><div class="stage-content"><div class="stage-label">Advance Directive — right to state how to be treated; appoint a nominee</div></div></div>
+        <div class="stage-row"><div class="stage-num" style="background:var(--u1l);color:var(--u1c)">2</div><div class="stage-content"><div class="stage-label">Access Healthcare — affordable, quality, geographically accessible; no discrimination</div></div></div>
+        <div class="stage-row"><div class="stage-num" style="background:var(--u1l);color:var(--u1c)">3</div><div class="stage-content"><div class="stage-label">Free Healthcare — for BPL/homeless/destitute; free Essential Drugs at govt. facilities</div></div></div>
+        <div class="stage-row"><div class="stage-num" style="background:var(--u1l);color:var(--u1c)">4</div><div class="stage-content"><div class="stage-label">Live in Community — cannot be secluded; mother with child under 3 not separated unless risk of harm</div></div></div>
+        <div class="stage-row"><div class="stage-num" style="background:var(--u1l);color:var(--u1c)">5</div><div class="stage-content"><div class="stage-label">Protection from Cruel Treatment — dignity (Article 21); safe & hygienic environment</div></div></div>
+        <div class="stage-row"><div class="stage-num" style="background:#fdecea;color:var(--u2c)">6</div><div class="stage-content"><div class="stage-label">No Prohibited Treatment — <strong>ECT completely banned for children</strong>; adults need anaesthesia + muscle relaxants</div></div></div>
+        <div class="stage-row"><div class="stage-num" style="background:var(--u1l);color:var(--u1c)">7</div><div class="stage-content"><div class="stage-label">Equality & Non-Discrimination — equal treatment with physically ill patients</div></div></div>
+        <div class="stage-row"><div class="stage-num" style="background:var(--u1l);color:var(--u1c)">8</div><div class="stage-content"><div class="stage-label">Right to Information — informed consent; understandable language</div></div></div>
+        <div class="stage-row"><div class="stage-num" style="background:var(--u1l);color:var(--u1c)">9</div><div class="stage-content"><div class="stage-label">Confidentiality — includes digital/electronic form; exceptions for public safety</div></div></div>
+        <div class="stage-row"><div class="stage-num" style="background:var(--u1l);color:var(--u1c)">10</div><div class="stage-content"><div class="stage-label">Legal Aid & Complaint — Article 39A; right to complain about deficiencies</div></div></div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════ UNIT 2 ═══════════════ -->
+<!-- ════════════════════════ UNIT 2 ════════════════════════ -->
 <div class="panel" id="u2">
-  <div class="unit-header u2-bg">
-    <div class="unit-label" style="color:var(--u2)">Unit 2</div>
-    <h2>Marital, Grief, Trauma & Family Counselling</h2>
-    <p>Gottman · EFT · CBT · BCT · SFT · Grief therapy · EMDR · Family therapy models</p>
+  <div class="unit-banner u2-banner" data-emoji="❤️">
+    <div>
+      <div class="unit-number">Unit 2</div>
+      <h2>Marital, Grief, Trauma & Family Counselling</h2>
+      <p>Gottman · EFT · CBT · BCT · SFT · Grief · EMDR · SET · Family therapy models</p>
+    </div>
   </div>
 
-  <!-- MARITAL -->
   <div class="section open">
-    <div class="section-head" onclick="toggle(this)">
-      <h3><span class="badge b2">Marital</span> Marital Counselling Overview</h3>
+    <div class="section-head" onclick="tog(this)">
+      <h3><span class="tag u2-tag">Gottman</span> Four Horsemen of the Apocalypse</h3>
       <span class="chevron">▼</span>
     </div>
     <div class="section-body">
-      <div class="def-box orange">Marital/couples counselling = psychotherapy that helps couples navigate challenges, improve communication, and strengthen their relationship in a safe, supportive space.</div>
-      <h4 class="sub">Issues Addressed (15 Key Areas)</h4>
-      <div class="pill-row">
-        <span class="pill">Communication problems</span><span class="pill">Conflict resolution</span><span class="pill">Intimacy issues</span><span class="pill">Infidelity & trust</span><span class="pill">Life transitions</span><span class="pill">Parenting challenges</span><span class="pill">Financial stress</span><span class="pill">Emotional distance</span><span class="pill">Past unresolved issues</span><span class="pill">Cultural/religious differences</span><span class="pill">Lack of quality time</span><span class="pill">Loss of connection</span><span class="pill">Emotional/physical abuse</span><span class="pill">Addiction issues</span><span class="pill">Sexual dysfunction</span>
+      <div class="def-box u2-def">The <strong>Gottman Method</strong> (John & Julie Gottman, 40+ years research) — strengthens relationships through communication, understanding & intimacy. Built around the <strong>Sound Relationship House</strong> model.</div>
+
+      <!-- Four Horsemen visual -->
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 700 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:130px">
+          <rect width="700" height="130" fill="#faf8f5" rx="10"/>
+          <!-- Criticism -->
+          <rect x="10" y="15" width="158" height="100" rx="12" fill="#fdecea" stroke="#e07060" stroke-width="1.5"/>
+          <text x="89" y="46" text-anchor="middle" font-size="22">😤</text>
+          <text x="89" y="67" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="12" font-weight="800" fill="#c0392b">Criticism</text>
+          <text x="89" y="82" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" fill="#a03020">Global negative</text>
+          <text x="89" y="95" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" fill="#a03020">character attacks</text>
+          <!-- Contempt -->
+          <rect x="178" y="15" width="158" height="100" rx="12" fill="#4a0010" stroke="#c0392b" stroke-width="1.5"/>
+          <text x="257" y="46" text-anchor="middle" font-size="22">🙄</text>
+          <text x="257" y="67" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="12" font-weight="800" fill="#ff8080">Contempt</text>
+          <text x="257" y="82" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" fill="#ffaaaa">Most destructive!</text>
+          <text x="257" y="95" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" fill="#ffaaaa">Disdain, sarcasm</text>
+          <!-- Defensiveness -->
+          <rect x="346" y="15" width="158" height="100" rx="12" fill="#e6eef8" stroke="#4a7cc4" stroke-width="1.5"/>
+          <text x="425" y="46" text-anchor="middle" font-size="22">🛡️</text>
+          <text x="425" y="67" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="12" font-weight="800" fill="#1a3f6b">Defensiveness</text>
+          <text x="425" y="82" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" fill="#2a5090">Deflecting blame,</text>
+          <text x="425" y="95" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" fill="#2a5090">making excuses</text>
+          <!-- Stonewalling -->
+          <rect x="514" y="15" width="172" height="100" rx="12" fill="#f0f0f0" stroke="#888" stroke-width="1.5"/>
+          <text x="600" y="46" text-anchor="middle" font-size="22">🧱</text>
+          <text x="600" y="67" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="12" font-weight="800" fill="#333">Stonewalling</text>
+          <text x="600" y="82" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" fill="#555">Withdrawal &</text>
+          <text x="600" y="95" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" fill="#555">silent treatment</text>
+        </svg>
+      </div>
+
+      <!-- Sound Relationship House diagram -->
+      <h4 class="sub">🏠 Sound Relationship House</h4>
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 500 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:250px">
+          <rect width="500" height="250" fill="#faf8f5" rx="10"/>
+          <!-- House outline -->
+          <polygon points="250,10 460,100 460,240 40,240 40,100" fill="none" stroke="#e07060" stroke-width="2" stroke-linejoin="round"/>
+          <!-- Roof -->
+          <polygon points="250,10 460,100 40,100" fill="#fdecea" stroke="#e07060" stroke-width="1.5"/>
+          <text x="250" y="55" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="10.5" font-weight="700" fill="#c0392b">Create Shared Meaning</text>
+
+          <!-- Floors — bottom to top inside house -->
+          <rect x="50" y="200" width="400" height="32" rx="4" fill="#fff3e6" stroke="#e08040" stroke-width="1"/>
+          <text x="250" y="221" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="10" font-weight="700" fill="#b5590a">Build Love Maps</text>
+
+          <rect x="50" y="165" width="400" height="32" rx="4" fill="#e8f8f0" stroke="#4aac7d" stroke-width="1"/>
+          <text x="250" y="186" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="10" font-weight="700" fill="#1a6b4a">Share Fondness &amp; Admiration</text>
+
+          <rect x="50" y="130" width="400" height="32" rx="4" fill="#e6eef8" stroke="#4a7cc4" stroke-width="1"/>
+          <text x="250" y="151" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="10" font-weight="700" fill="#1a3f6b">Turn Towards Instead of Away</text>
+
+          <rect x="50" y="105" width="400" height="22" rx="4" fill="#ede7f6" stroke="#9c7cc4" stroke-width="1"/>
+          <text x="250" y="120" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9.5" font-weight="700" fill="#5c3d8f">Manage Conflict · Positive Perspective · Make Life Dreams Come True</text>
+
+          <!-- Walls = Trust & Commitment -->
+          <text x="20" y="175" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" font-weight="700" fill="#c0392b" transform="rotate(-90 20 175)">TRUST</text>
+          <text x="486" y="175" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" font-weight="700" fill="#c0392b" transform="rotate(90 486 175)">COMMITMENT</text>
+        </svg>
       </div>
     </div>
   </div>
 
-  <!-- GOTTMAN -->
+  <!-- EFT 3 STAGES -->
   <div class="section">
-    <div class="section-head" onclick="toggle(this)">
-      <h3><span class="badge b2">Therapy</span> Gottman Method</h3>
+    <div class="section-head" onclick="tog(this)">
+      <h3><span class="tag u2-tag">EFT</span> Emotionally Focused Therapy — 3 Stages</h3>
       <span class="chevron">▼</span>
     </div>
     <div class="section-body">
-      <p class="note">Developed by Drs. John & Julie Gottman — based on 40+ decades of research. Focuses on strengthening relationships through communication, understanding, and intimacy.</p>
-      <h4 class="sub">Sound Relationship House</h4>
-      <p class="note">A foundational metaphor — represents 7 levels of a healthy relationship (bottom to top): Build Love Maps → Share Fondness & Admiration → Turn Towards Instead of Away → Positive Perspective → Manage Conflict → Make Life Dreams Come True → Create Shared Meaning. Trust & Commitment are the walls.</p>
-      <h4 class="sub">Four Horsemen of the Apocalypse (⚠️ High-yield)</h4>
-      <div class="horseman h-red"><strong>1. Criticism</strong>Global negative statements about partner's character (not specific behaviour). "You always ignore my needs!"</div>
-      <div class="horseman h-orange"><strong>2. Contempt</strong>Most intense — disdain, superiority. Eye-rolling, sarcasm, name-calling, mockery. Most destructive of the four.</div>
-      <div class="horseman h-blue"><strong>3. Defensiveness</strong>Responding to criticism by deflecting blame, making excuses, or counter-complaining. "It's not my fault!"</div>
-      <div class="horseman h-gray"><strong>4. Stonewalling</strong>Withdrawal/shutdown — silent treatment, leaving room, refusing to engage. Avoids conflict but creates emotional distance.</div>
-    </div>
-  </div>
-
-  <!-- EFT -->
-  <div class="section">
-    <div class="section-head" onclick="toggle(this)">
-      <h3><span class="badge b2">Therapy</span> Emotionally Focused Therapy (EFT)</h3>
-      <span class="chevron">▼</span>
-    </div>
-    <div class="section-body">
-      <p class="note">Developed by Dr. Sue Johnson & Dr. Les Greenberg. Evidence-based. Grounded in <strong>attachment theory</strong> — secure emotional bonds are central to relationship satisfaction.</p>
-      <h4 class="sub">3 Stages of EFT</h4>
-      <div class="grid-2">
-        <div class="card"><h4 style="color:var(--u2)">Stage 1: De-escalation</h4><ul><li>Address negative patterns & emotional reactivity</li><li>Create safe emotional space for both partners</li></ul></div>
-        <div class="card"><h4 style="color:var(--u2)">Stage 2: Restructuring</h4><ul><li>Identify & reshape emotional responses</li><li>Foster new, more positive communication patterns</li></ul></div>
-        <div class="card"><h4 style="color:var(--u2)">Stage 3: Consolidation</h4><ul><li>Strengthen changes from stages 1 & 2</li><li>Promote ongoing growth & connection</li></ul></div>
+      <div class="def-box u2-def">Developed by <strong>Dr. Sue Johnson & Dr. Les Greenberg.</strong> Grounded in <strong>attachment theory</strong> — secure emotional bonds are essential for relationship satisfaction.</div>
+      <div class="flow-steps">
+        <div class="flow-step" style="background:#fdecea;color:#c0392b;border:1.5px solid #e07060">Stage 1<br><strong>De-escalation</strong><br><small>Negative patterns → Safe space</small></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step" style="background:#fff3e6;color:#b5590a;border:1.5px solid #e08040">Stage 2<br><strong>Restructuring</strong><br><small>Reshape emotional responses</small></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step" style="background:#e8f8f0;color:#1a6b4a;border:1.5px solid #4aac7d">Stage 3<br><strong>Consolidation</strong><br><small>Strengthen changes; ongoing growth</small></div>
       </div>
     </div>
   </div>
 
-  <!-- OTHER THERAPIES -->
+  <!-- THERAPIES COMPARISON -->
   <div class="section">
-    <div class="section-head" onclick="toggle(this)">
-      <h3><span class="badge b2">Therapy</span> CBT, BCT, SFT & Psychodynamic</h3>
+    <div class="section-head" onclick="tog(this)">
+      <h3><span class="tag u2-tag">Compare</span> Marital Therapy Approaches</h3>
       <span class="chevron">▼</span>
     </div>
     <div class="section-body">
       <table>
-        <tr><th>Therapy</th><th>Focus</th><th>Key Feature</th></tr>
-        <tr>
-          <td><span class="kw">CBT</span></td>
-          <td>Negative thought patterns & behaviours</td>
-          <td>Cognitive restructuring; behavioural experiments; ABC model (A=Event, B=Beliefs, C=Consequences)</td>
-        </tr>
-        <tr>
-          <td><span class="kw">BCT</span><br><small style="color:var(--muted)">Behavioural Couples Therapy</small></td>
-          <td>Modifying behaviours</td>
-          <td>Operant conditioning; communication skills training; contingency management; problem-solving</td>
-        </tr>
-        <tr>
-          <td><span class="kw">SFT</span><br><small style="color:var(--muted)">Solution-Focused</small></td>
-          <td>Solutions, not problems</td>
-          <td>Future-oriented; "preferred future" vision; focuses on "how" not "why"; strengths & resources</td>
-        </tr>
-        <tr>
-          <td><span class="kw">Psychodynamic</span></td>
-          <td>Unconscious processes & past</td>
-          <td>Long-term; explores defence mechanisms; past experiences influence present dynamics</td>
-        </tr>
+        <tr><th class="u2-th">Therapy</th><th class="u2-th">Focus</th><th class="u2-th">Key Technique</th></tr>
+        <tr><td><strong>CBT</strong></td><td>Negative thought patterns & behaviours</td><td>Cognitive restructuring; ABC model; behavioural experiments</td></tr>
+        <tr><td><strong>BCT</strong> (Behavioural)</td><td>Modifying observable behaviours</td><td>Operant conditioning; communication skills; contingency management</td></tr>
+        <tr><td><strong>SFT</strong> (Solution-Focused)</td><td>Solutions, not problems</td><td>"Preferred future" vision; strengths-based; focuses on "how" not "why"</td></tr>
+        <tr><td><strong>Psychodynamic</strong></td><td>Unconscious processes & past</td><td>Explores defence mechanisms; long-term; past → present dynamics</td></tr>
+        <tr><td><strong>EFT</strong></td><td>Emotional bonds (attachment)</td><td>3-stage model; restructure emotional responses</td></tr>
+        <tr><td><strong>Gottman Method</strong></td><td>Communication & intimacy</td><td>Sound Relationship House; identify Four Horsemen</td></tr>
       </table>
     </div>
   </div>
 
   <!-- GRIEF -->
   <div class="section">
-    <div class="section-head" onclick="toggle(this)">
-      <h3><span class="badge b2">Grief</span> Grief & Bereavement Counselling</h3>
+    <div class="section-head" onclick="tog(this)">
+      <h3><span class="tag u2-tag">Grief</span> Grief & Bereavement Counselling</h3>
       <span class="chevron">▼</span>
     </div>
     <div class="section-body">
-      <div class="def-box orange">Addresses emotional, psychological, and social impacts of loss. Anyone experiencing loss can benefit — individuals, partners, parents, children, those facing anticipated loss, or those with complicated grief.</div>
-      <h4 class="sub">Techniques</h4>
-      <ul class="clean">
-        <li><span class="kw">Talk therapy</span> — safe space to express emotions</li>
-        <li><span class="kw">Grief education</span> — understanding stages & normal grief</li>
-        <li><span class="kw">Coping skills</span> — relaxation, mindfulness, journaling</li>
-        <li><span class="kw">Social connection</span> — staying connected with support network</li>
-        <li><span class="kw">Complicated grief</span> — additional support when prolonged</li>
-      </ul>
-      <h4 class="sub">For Children vs Adults</h4>
-      <div class="grid-2">
-        <div class="card">
-          <h4 style="color:var(--u2)">Children</h4>
-          <ul><li>Express through play, behavioural changes, withdrawal</li><li>Types: Individual, Play therapy, Group, Family therapy</li><li>Key: age-appropriate explanations; prevent long-term impacts</li></ul>
+      <div class="grid2">
+        <div class="card u2-card">
+          <h4 style="color:var(--u2c)">🧒 For Children</h4>
+          <ul>
+            <li>Express through play, withdrawal, physical symptoms</li>
+            <li>May lack vocabulary for feelings</li>
+            <li>Types: Individual, <strong>Play therapy</strong>, Group, Family</li>
+            <li>Focus: age-appropriate explanations; prevent long-term impacts</li>
+          </ul>
         </div>
-        <div class="card">
-          <h4 style="color:var(--u2)">Adults</h4>
-          <ul><li>CBT, IPT, Mindfulness-Based (MBSR/MBCT)</li><li>Narrative therapy, Existential therapy</li><li>DBT (Marsha Linehan), SFBT (6–12 sessions)</li><li>Expressive therapies, Group therapy</li></ul>
+        <div class="card u2-card">
+          <h4 style="color:var(--u2c)">🧑 For Adults</h4>
+          <ul>
+            <li>CBT, IPT, Mindfulness (MBSR/MBCT)</li>
+            <li>Narrative therapy, Existential therapy</li>
+            <li><strong>DBT</strong> (Marsha Linehan)</li>
+            <li><strong>SFBT</strong> — 6–12 sessions only</li>
+            <li>Expressive therapies, Group therapy</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -713,578 +924,941 @@
 
   <!-- TRAUMA -->
   <div class="section">
-    <div class="section-head" onclick="toggle(this)">
-      <h3><span class="badge b2">Trauma</span> Trauma Counselling</h3>
+    <div class="section-head" onclick="tog(this)">
+      <h3><span class="tag u2-tag">Trauma</span> Trauma Therapy — EMDR, SET, Exposure</h3>
       <span class="chevron">▼</span>
     </div>
     <div class="section-body">
-      <h4 class="sub">Types of Trauma</h4>
-      <div class="grid-2">
-        <div class="card">
-          <h4>By Duration</h4>
-          <ul><li><strong>Acute</strong> — single overwhelming event</li><li><strong>Chronic</strong> — repeated exposure over time</li><li><strong>Complex</strong> — multiple/prolonged events (often childhood)</li></ul>
+      <div class="grid3">
+        <div class="card" style="background:#e6eef8;border-color:#4a7cc4">
+          <h4 style="color:#1a3f6b">👁️ EMDR</h4>
+          <ul>
+            <li>Eye Movement Desensitization & Reprocessing</li>
+            <li><strong>Bilateral stimulation</strong> — eye movements, tapping, auditory tones</li>
+            <li>Unsticks traumatic memories from brain networks</li>
+            <li>Used for PTSD</li>
+          </ul>
         </div>
-        <div class="card">
-          <h4>By Cause</h4>
-          <ul><li>Physical, Emotional, Sexual</li><li>Medical, Attachment, Secondary trauma</li></ul>
+        <div class="card" style="background:#e8f8f0;border-color:#4aac7d">
+          <h4 style="color:#1a6b4a">🌿 SET</h4>
+          <ul>
+            <li>Somatic Experiencing Therapy</li>
+            <li>Developer: <strong>Dr. Peter Levine</strong></li>
+            <li>Body-focused; somatic psychology</li>
+            <li>Addresses physiological responses to trauma</li>
+          </ul>
+        </div>
+        <div class="card" style="background:#fff3e6;border-color:#e08040">
+          <h4 style="color:#b5590a">🎯 Exposure Therapy</h4>
+          <ul>
+            <li>Classical conditioning principles</li>
+            <li>Gradual, systematic exposure</li>
+            <li><strong>Imaginal</strong> (recall memory) vs <strong>In Vivo</strong> (real situations)</li>
+            <li>Evidence-based for PTSD</li>
+          </ul>
         </div>
       </div>
-      <h4 class="sub">Key Therapies</h4>
-      <table>
-        <tr><th>Therapy</th><th>Key Mechanism</th></tr>
-        <tr><td><span class="kw">EMDR</span><br><small style="color:var(--muted)">Eye Movement Desensitization & Reprocessing</small></td><td>Bilateral stimulation (eye movements, tapping, auditory tones) while recalling distressing memories; unsticks traumatic memories from brain networks</td></tr>
-        <tr><td><span class="kw">SET</span><br><small style="color:var(--muted)">Somatic Experiencing Therapy — Dr. Peter Levine</small></td><td>Body-focused; addresses physiological responses to trauma; somatic psychology (mind-body connection)</td></tr>
-        <tr><td><span class="kw">Exposure Therapy</span></td><td>Gradual, systematic exposure to traumatic stimuli; classical conditioning principles; imaginal vs. in vivo exposure</td></tr>
-      </table>
     </div>
   </div>
 
   <!-- FAMILY THERAPY -->
   <div class="section">
-    <div class="section-head" onclick="toggle(this)">
-      <h3><span class="badge b2">Family</span> Family Counselling / Therapy</h3>
+    <div class="section-head" onclick="tog(this)">
+      <h3><span class="tag u2-tag">Family</span> Family Therapy — 4 Models</h3>
       <span class="chevron">▼</span>
     </div>
     <div class="section-body">
-      <h4 class="sub">4 Major Approaches</h4>
-      <table>
-        <tr><th>Approach</th><th>Founder</th><th>Core Idea</th><th>Key Technique</th></tr>
-        <tr>
-          <td><span class="kw">Structural</span></td>
-          <td>Salvador Minuchin</td>
-          <td>Restructure dysfunctional interaction patterns; 5 specific principles; "matrix of identity"</td>
-          <td>Observe family boundaries & hierarchies; redistribute power</td>
-        </tr>
-        <tr>
-          <td><span class="kw">Strategic</span></td>
-          <td>Jay Haley & Milton Erickson</td>
-          <td>Strategic interventions to disrupt patterns; focus on change not insight; directives & tasks</td>
-          <td>Paradoxical interventions, Reframing, Positive reinforcement</td>
-        </tr>
-        <tr>
-          <td><span class="kw">Narrative</span></td>
-          <td>Michael White & David Epston</td>
-          <td>Re-author family stories; externalize problems; problems don't define people</td>
-          <td>Externalizing the problem; co-constructing preferred narratives</td>
-        </tr>
-        <tr>
-          <td><span class="kw">Bowenian</span></td>
-          <td>Murray Bowen</td>
-          <td>Multigenerational dynamics; differentiation of self; triangulation</td>
-          <td>Genograms; Process Questions; Coaching Differentiation</td>
-        </tr>
-      </table>
-    </div>
-  </div>
-
-  <!-- DISABILITY & QUEER -->
-  <div class="section">
-    <div class="section-head" onclick="toggle(this)">
-      <h3><span class="badge b2">Special</span> Counselling for Disabilities & Queer Affirmative</h3>
-      <span class="chevron">▼</span>
-    </div>
-    <div class="section-body">
-      <h4 class="sub">Types of Disabilities</h4>
-      <div class="pill-row">
-        <span class="pill">Physical</span><span class="pill">Sensory</span><span class="pill">Intellectual</span><span class="pill">Developmental</span><span class="pill">Psychiatric</span><span class="pill">Neurological</span><span class="pill">Chronic Health</span>
+      <div class="grid2">
+        <div class="card u2-card">
+          <h4 style="color:var(--u2c)">🏗️ Structural (Minuchin)</h4>
+          <ul><li>Restructure dysfunctional patterns</li><li>5 specific principles; "matrix of identity"</li><li>Focus on interactions, not individual psyches</li><li>Boundaries, hierarchies, power redistribution</li></ul>
+        </div>
+        <div class="card u2-card">
+          <h4 style="color:var(--u2c)">♟️ Strategic (Haley & Erickson)</h4>
+          <ul><li>Strategic interventions to disrupt patterns</li><li>Focus on change, not insight</li><li>Key: <strong>Paradoxical Interventions</strong>, Reframing</li><li>Prescribes specific tasks & directives</li></ul>
+        </div>
+        <div class="card u2-card">
+          <h4 style="color:var(--u2c)">📖 Narrative (White & Epston)</h4>
+          <ul><li>Re-author family stories</li><li>Problems ≠ people (externalize problems)</li><li>Key: <strong>Externalizing</strong>, Deconstructing, Co-constructing</li></ul>
+        </div>
+        <div class="card u2-card">
+          <h4 style="color:var(--u2c)">🌳 Bowenian (Murray Bowen)</h4>
+          <ul><li>Multigenerational dynamics</li><li>Key concepts: Differentiation of Self, <strong>Triangulation</strong>, Emotional Cutoff</li><li>Key technique: <strong>Genograms</strong></li></ul>
+        </div>
       </div>
-      <h4 class="sub">Queer Affirmative Counselling (QACP) Tenets</h4>
-      <ul class="clean">
-        <li>Use <strong>queer affirmative language</strong> — non-stigmatising, non-pathologising</li>
-        <li><strong>Queer affirmative setup</strong> — visible signals of safety (posters, books)</li>
-        <li><strong>Avoid assumptions</strong> — voluntary disclosure, seek clarification</li>
-        <li><strong>Challenge misinformation</strong> — explore source, supply new knowledge</li>
-        <li><strong>Facilitate self-acceptance</strong> — validate lived realities</li>
-        <li><strong>Know resources</strong> — NGOs, support groups, reliable referrals</li>
-        <li><strong>Maintain confidentiality</strong></li>
-        <li><strong>Self-awareness</strong> — know your own biases, be open to correction</li>
-      </ul>
-      <div class="def-box orange">Person-Centered phases of sexual identity (Manshadi): 1) Identity confusion → 2) Compare heterosexual identity → 3) Identity tolerance → 4) Sexuality insight → 5) Pride → 6) Self-actualization</div>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════ UNIT 3 ═══════════════ -->
+<!-- ════════════════════════ UNIT 3 ════════════════════════ -->
 <div class="panel" id="u3">
-  <div class="unit-header u3-bg">
-    <div class="unit-label" style="color:var(--u3)">Unit 3</div>
-    <h2>Counselling Addictions</h2>
-    <p>Substance use/abuse · Models of addiction · TTM Stages of Change · Relapse prevention</p>
+  <div class="unit-banner u3-banner" data-emoji="🌿">
+    <div>
+      <div class="unit-number">Unit 3</div>
+      <h2>Counselling Addictions</h2>
+      <p>Substance use · 8 models · TTM Stages of Change · Relapse prevention</p>
+    </div>
   </div>
 
   <div class="section open">
-    <div class="section-head" onclick="toggle(this)">
-      <h3><span class="badge b3">Core</span> Substance Use, Abuse & Dependence</h3>
+    <div class="section-head" onclick="tog(this)">
+      <h3><span class="tag u3-tag">Core</span> Use → Abuse → Dependence → Addiction</h3>
       <span class="chevron">▼</span>
     </div>
     <div class="section-body">
-      <table>
-        <tr><th>Term</th><th>Definition</th></tr>
-        <tr><td><span class="kw">Substance Use</span></td><td>Simply using a substance — medical, recreational, or religious</td></tr>
-        <tr><td><span class="kw">Substance Abuse</span></td><td>Pattern of use causing negative consequences (work, school, home, relationships)</td></tr>
-        <tr><td><span class="kw">Substance Dependence</span></td><td>Physical and/or psychological need; withdrawal symptoms if stopped; component of addiction</td></tr>
-        <tr><td><span class="kw">Addiction</span></td><td>Chronic, relapsing condition; compulsive drug seeking, craving, use despite harm; changes in brain reward circuitry</td></tr>
-      </table>
-      <h4 class="sub">DSM-5 TR Symptom Categories</h4>
-      <div class="grid-2">
-        <div class="card"><h4 style="color:var(--u3)">Impaired Control</h4><ul><li>Using more than planned</li><li>Unable to stop</li><li>Craving</li><li>Failed attempts to cut down</li></ul></div>
-        <div class="card"><h4 style="color:var(--u3)">Social Problems</h4><ul><li>Failure at work/school/home</li><li>Giving up leisure activities</li></ul></div>
-        <div class="card"><h4 style="color:var(--u3)">Risky Use</h4><ul><li>Use in dangerous situations (driving, machinery)</li><li>Continued use despite known problems</li></ul></div>
-        <div class="card"><h4 style="color:var(--u3)">Drug Effects</h4><ul><li>Tolerance (need more for same effect)</li><li>Withdrawal symptoms</li></ul></div>
+      <div class="flow-steps">
+        <div class="flow-step" style="background:#e8f8f0;color:#1a6b4a;border:1.5px solid #4aac7d;font-size:0.75rem">Substance<br><strong>Use</strong><br>Medical/recreational</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step" style="background:#fff3e6;color:#b5590a;border:1.5px solid #e08040;font-size:0.75rem">Substance<br><strong>Abuse</strong><br>Negative consequences</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step" style="background:#fdecea;color:#c0392b;border:1.5px solid #e07060;font-size:0.75rem">Substance<br><strong>Dependence</strong><br>Physical/psych need</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step" style="background:#2d0010;color:#ff8080;border:1.5px solid #c0392b;font-size:0.75rem">Full<br><strong>Addiction</strong><br>Compulsive; brain change</div>
       </div>
-      <h4 class="sub">Stages of Addiction</h4>
+
+      <h4 class="sub">📊 6 Stages of Addiction</h4>
       <div class="pill-row">
-        <span class="pill highlight">1. Initial Use</span>
-        <span class="pill highlight">2. Abuse</span>
-        <span class="pill highlight">3. Tolerance</span>
-        <span class="pill highlight">4. Dependence</span>
-        <span class="pill highlight">5. Addiction</span>
-        <span class="pill highlight">6. Relapse</span>
+        <span class="pill" style="background:#e8f8f0;border-color:#4aac7d;color:#1a6b4a">1. Initial Use</span>
+        <span class="pill" style="background:#f0f8e8;border-color:#8ac050;color:#3a7010">2. Abuse</span>
+        <span class="pill" style="background:#fff8e0;border-color:#d4a020;color:#806010">3. Tolerance</span>
+        <span class="pill" style="background:#fff0d8;border-color:#e08040;color:#905020">4. Dependence</span>
+        <span class="pill" style="background:#fde0dc;border-color:#e06050;color:#a03020">5. Addiction</span>
+        <span class="pill" style="background:#fdecea;border-color:#c0392b;color:#8a1818">6. Relapse</span>
+      </div>
+
+      <h4 class="sub">DSM-5 TR — 4 Symptom Categories</h4>
+      <div class="grid2">
+        <div class="card u3-card"><h4 style="color:var(--u3c)">🔴 Impaired Control</h4><ul><li>Using more than planned</li><li>Unable to stop</li><li>Craving</li><li>Failed attempts to cut down</li></ul></div>
+        <div class="card u3-card"><h4 style="color:var(--u3c)">🔴 Social Problems</h4><ul><li>Failure at work/school/home</li><li>Giving up leisure activities</li></ul></div>
+        <div class="card u3-card"><h4 style="color:var(--u3c)">🔴 Risky Use</h4><ul><li>Use while driving/operating machinery</li><li>Continued use despite known problems</li></ul></div>
+        <div class="card u3-card"><h4 style="color:var(--u3c)">🔴 Drug Effects</h4><ul><li>Tolerance (need more for same effect)</li><li>Withdrawal symptoms on stopping</li></ul></div>
       </div>
     </div>
   </div>
 
+  <!-- DRUG CLASSES -->
   <div class="section">
-    <div class="section-head" onclick="toggle(this)">
-      <h3><span class="badge b3">Key</span> Drug Classes</h3>
+    <div class="section-head" onclick="tog(this)">
+      <h3><span class="tag u3-tag">Drug Classes</span> 6 Drug Classes</h3>
       <span class="chevron">▼</span>
     </div>
     <div class="section-body">
       <table>
-        <tr><th>Class</th><th>Effect</th><th>Health Impact</th><th>Examples</th></tr>
-        <tr><td><span class="kw">Depressants</span></td><td>Slows brain & body</td><td>Slowed reaction, disorientation, depression, fatigue</td><td>Alcohol, Xanax, Valium, Ambien</td></tr>
-        <tr><td><span class="kw">Stimulants</span></td><td>Speeds up brain & body</td><td>Rapid heartbeat, increased respiration, heart attack, seizures</td><td>Nicotine, Adderall, Cocaine, Meth</td></tr>
-        <tr><td><span class="kw">Hallucinogens</span></td><td>Alters perceptions</td><td>Increased temperature, sweating, psychosis</td><td>LSD, Psilocybin, Peyote</td></tr>
-        <tr><td><span class="kw">Dissociatives</span></td><td>Alters perceptions + detachment from reality</td><td>Disorientation, speech difficulties, memory issues</td><td>PCP, DXM, Ketamine, Salvia</td></tr>
-        <tr><td><span class="kw">Opioids</span></td><td>Relieve pain, induce euphoria</td><td>Drowsiness, insomnia, collapsed veins, coma</td><td>Heroin, Fentanyl, Vicodin, Codeine</td></tr>
-        <tr><td><span class="kw">Inhalants</span></td><td>Breathable mind-altering substances</td><td>Slurred speech, suffocation, brain damage</td><td>Paint Thinners, Gasoline, Whip-its</td></tr>
+        <tr><th class="u3-th">Class</th><th class="u3-th">Effect on Body</th><th class="u3-th">Health Impact</th><th class="u3-th">Examples</th></tr>
+        <tr><td><strong style="color:#1a3f6b">Depressants</strong></td><td>Slows brain & body</td><td>Slowed reaction, disorientation, fatigue</td><td>Alcohol, Xanax, Valium, Ambien</td></tr>
+        <tr><td><strong style="color:#c0392b">Stimulants</strong></td><td>Speeds up brain & body</td><td>Rapid heartbeat, seizures, heart attack</td><td>Nicotine, Adderall, Cocaine, Meth</td></tr>
+        <tr><td><strong style="color:#8a2be2">Hallucinogens</strong></td><td>Alters perceptions</td><td>Increased temp, sweating, psychosis</td><td>LSD, Psilocybin, Peyote</td></tr>
+        <tr><td><strong style="color:#2d6b8a">Dissociatives</strong></td><td>Detachment from reality</td><td>Disorientation, speech difficulties, memory issues</td><td>PCP, DXM, Ketamine, Salvia</td></tr>
+        <tr><td><strong style="color:#8a4000">Opioids</strong></td><td>Pain relief, euphoria</td><td>Drowsiness, collapsed veins, coma</td><td>Heroin, Fentanyl, Vicodin, Codeine</td></tr>
+        <tr><td><strong style="color:#2d7a40">Inhalants</strong></td><td>Breathable, mind-altering</td><td>Slurred speech, suffocation, brain damage</td><td>Paint Thinners, Gasoline, Whip-its</td></tr>
       </table>
     </div>
   </div>
 
+  <!-- 8 MODELS -->
   <div class="section">
-    <div class="section-head" onclick="toggle(this)">
-      <h3><span class="badge b3">Key</span> Special Concepts</h3>
+    <div class="section-head" onclick="tog(this)">
+      <h3><span class="tag u3-tag">Models</span> 8 Models of Addiction</h3>
       <span class="chevron">▼</span>
     </div>
     <div class="section-body">
-      <div class="grid-2">
-        <div class="card">
-          <h4 style="color:var(--u3)">Polysubstance Use</h4>
-          <ul><li>Concurrent use of 2+ substances</li><li>Greater cognitive deficits than single-drug users</li><li>Intentional: to enhance/decrease effects of another drug</li><li>Unintentional: drugs mixed with unknown substances (e.g., fentanyl)</li></ul>
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:200px">
+          <rect width="700" height="200" fill="#faf8f5" rx="10"/>
+          <!-- Center -->
+          <circle cx="350" cy="100" r="42" fill="#1a6b4a" opacity="0.9"/>
+          <text x="350" y="96" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="10" font-weight="800" fill="white">Biopsycho-</text>
+          <text x="350" y="110" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="10" font-weight="800" fill="white">social</text>
+          <text x="350" y="123" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="8" fill="#c8f0dc">(Most accepted)</text>
+          <!-- Satellites -->
+          <circle cx="100" cy="45" r="34" fill="#ede7f6" stroke="#9c7cc4" stroke-width="1.5"/>
+          <text x="100" y="41" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" font-weight="700" fill="#5c3d8f">Social/</text>
+          <text x="100" y="54" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" font-weight="700" fill="#5c3d8f">Environmental</text>
+
+          <circle cx="240" cy="30" r="30" fill="#e6eef8" stroke="#4a7cc4" stroke-width="1.5"/>
+          <text x="240" y="26" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" font-weight="700" fill="#1a3f6b">Genetic</text>
+          <text x="240" y="39" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="8" fill="#2a5090">not deterministic</text>
+
+          <circle cx="460" cy="30" r="30" fill="#fff3e6" stroke="#e08040" stroke-width="1.5"/>
+          <text x="460" y="26" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" font-weight="700" fill="#b5590a">Personality</text>
+          <text x="460" y="39" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="8" fill="#905018">traits & traits</text>
+
+          <circle cx="600" cy="45" r="34" fill="#fdecea" stroke="#e07060" stroke-width="1.5"/>
+          <text x="600" y="41" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" font-weight="700" fill="#c0392b">Coping</text>
+          <text x="600" y="54" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" font-weight="700" fill="#c0392b">Model</text>
+
+          <circle cx="100" cy="155" r="34" fill="#e6f4ee" stroke="#4aac7d" stroke-width="1.5"/>
+          <text x="100" y="151" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" font-weight="700" fill="#1a6b4a">Social</text>
+          <text x="100" y="164" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" font-weight="700" fill="#1a6b4a">Learning</text>
+
+          <circle cx="240" cy="170" r="30" fill="#f5f0ff" stroke="#9c7cc4" stroke-width="1.5"/>
+          <text x="240" y="172" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" font-weight="700" fill="#4a2d70">Conditioning</text>
+
+          <circle cx="460" cy="170" r="30" fill="#fff8e0" stroke="#d4a020" stroke-width="1.5"/>
+          <text x="460" y="172" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" font-weight="700" fill="#806010">Compulsive</text>
+
+          <circle cx="600" cy="155" r="34" fill="#1a6b4a" opacity="0.15" stroke="#1a6b4a" stroke-width="1.5"/>
+          <text x="600" y="151" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" font-weight="700" fill="#1a6b4a">Biopsycho-</text>
+          <text x="600" y="164" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" font-weight="700" fill="#1a6b4a">social (★)</text>
+        </svg>
+      </div>
+
+      <table>
+        <tr><th class="u3-th">Model</th><th class="u3-th">Core Idea</th><th class="u3-th">Key Detail</th></tr>
+        <tr><td><strong>Social/Environmental</strong></td><td>Learned behaviour via social factors</td><td>Familial environment critical in early adolescence; poverty, stigma</td></tr>
+        <tr><td><strong>Genetic</strong></td><td>Genetic variations predispose — NOT deterministic</td><td>Dopamine, serotonin, GABA systems; twin/family studies</td></tr>
+        <tr><td><strong>Personality</strong></td><td>Certain traits predispose to addiction</td><td>Sensation-seeking, impulsivity, low conscientiousness, neuroticism</td></tr>
+        <tr><td><strong>Coping</strong></td><td>Addiction as self-medication</td><td>Linked to dual diagnosis; explains relapse under stress</td></tr>
+        <tr><td><strong>Social Learning</strong></td><td>Observational learning of addictive behaviour</td><td>Vicarious reinforcement; modelling; media influence</td></tr>
+        <tr><td><strong>Conditioning</strong></td><td>Environmental cues trigger cravings</td><td>Classical (cue → craving); Operant (reward → repeated use)</td></tr>
+        <tr><td><strong>Compulsive</strong></td><td>Loss of control despite consequences</td><td>Habit formation; disrupts brain reward/decision circuits</td></tr>
+        <tr><td><strong style="color:var(--u3c)">★ Biopsychosocial</strong></td><td>Most widely accepted; Bio + Psych + Social interplay</td><td>Bio: genetics, brain chemistry | Psych: personality, mental health | Social: family, culture</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- TTM -->
+  <div class="section">
+    <div class="section-head" onclick="tog(this)">
+      <h3><span class="tag u3-tag">TTM</span> Transtheoretical Model — Stages of Change</h3>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="def-box u3-def">Developed by <strong>Prochaska & DiClemente (late 1970s)</strong> — studying smokers who quit on their own vs those needing treatment. People do NOT change quickly; they move through <strong>6 distinct stages.</strong></div>
+
+      <!-- TTM Circle Diagram -->
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:300px">
+          <rect width="500" height="300" fill="#faf8f5" rx="10"/>
+          <!-- Circle path -->
+          <circle cx="250" cy="150" r="110" fill="none" stroke="#e0d8f0" stroke-width="2" stroke-dasharray="6,4"/>
+          <!-- Stage nodes -->
+          <!-- 1 Precontemplation - top -->
+          <circle cx="250" cy="38" r="34" fill="#ede7f6" stroke="#9c7cc4" stroke-width="2"/>
+          <text x="250" y="34" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="8.5" font-weight="700" fill="#5c3d8f">Pre-</text>
+          <text x="250" y="46" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="8.5" font-weight="700" fill="#5c3d8f">contemplation</text>
+
+          <!-- 2 Contemplation - top right -->
+          <circle cx="400" cy="100" r="34" fill="#e6eef8" stroke="#4a7cc4" stroke-width="2"/>
+          <text x="400" y="96" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="8.5" font-weight="700" fill="#1a3f6b">Contem-</text>
+          <text x="400" y="108" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="8.5" font-weight="700" fill="#1a3f6b">plation</text>
+
+          <!-- 3 Preparation - right -->
+          <circle cx="430" cy="195" r="34" fill="#fff3e6" stroke="#e08040" stroke-width="2"/>
+          <text x="430" y="191" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="8.5" font-weight="700" fill="#b5590a">Prepar-</text>
+          <text x="430" y="203" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="8.5" font-weight="700" fill="#b5590a">ation</text>
+
+          <!-- 4 Action - bottom right -->
+          <circle cx="340" cy="260" r="34" fill="#fdecea" stroke="#e07060" stroke-width="2"/>
+          <text x="340" y="263" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" font-weight="800" fill="#c0392b">Action</text>
+
+          <!-- 5 Maintenance - bottom left -->
+          <circle cx="160" cy="260" r="34" fill="#e6f4ee" stroke="#4aac7d" stroke-width="2"/>
+          <text x="160" y="256" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="8.5" font-weight="700" fill="#1a6b4a">Mainten-</text>
+          <text x="160" y="268" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="8.5" font-weight="700" fill="#1a6b4a">ance</text>
+
+          <!-- 6 Termination - left -->
+          <circle cx="70" cy="195" r="34" fill="#f0f0f0" stroke="#888" stroke-width="2"/>
+          <text x="70" y="192" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="8.5" font-weight="700" fill="#555">Termin-</text>
+          <text x="70" y="204" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="8.5" font-weight="700" fill="#555">ation</text>
+
+          <!-- Arrows -->
+          <path d="M270,60 Q340,60 370,80" fill="none" stroke="#9c7cc4" stroke-width="1.5" marker-end="url(#arr)"/>
+          <path d="M420,130 Q440,165 445,175" fill="none" stroke="#4a7cc4" stroke-width="1.5" marker-end="url(#arr)"/>
+          <path d="M418,220 Q390,245 368,255" fill="none" stroke="#e08040" stroke-width="1.5" marker-end="url(#arr)"/>
+          <path d="M308,265 Q240,275 192,268" fill="none" stroke="#e07060" stroke-width="1.5" marker-end="url(#arr)"/>
+          <path d="M128,258 Q92,238 82,220" fill="none" stroke="#4aac7d" stroke-width="1.5" marker-end="url(#arr)"/>
+          <!-- Relapse arrow back -->
+          <path d="M140,248 Q100,180 140,120 Q180,60 235,50" fill="none" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr2)"/>
+          <text x="88" y="165" font-family="Plus Jakarta Sans" font-size="8" fill="#c0392b" font-weight="600">Relapse</text>
+          <defs>
+            <marker id="arr" viewBox="0 0 6 6" refX="3" refY="3" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#888"/></marker>
+            <marker id="arr2" viewBox="0 0 6 6" refX="3" refY="3" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#c0392b"/></marker>
+          </defs>
+        </svg>
+      </div>
+
+      <h4 class="sub">Stage Details</h4>
+      <div class="stages">
+        <div class="stage-row">
+          <div class="stage-num" style="background:#ede7f6;color:#5c3d8f">1</div>
+          <div class="stage-content">
+            <div class="stage-label">Precontemplation <span class="stage-time" style="background:#ede7f6;color:#5c3d8f">No action within 6 months</span></div>
+            <div class="stage-desc">Unaware problem exists; underestimates pros of change; denial</div>
+          </div>
         </div>
-        <div class="card">
-          <h4 style="color:var(--u3)">Dual Diagnosis</h4>
-          <ul><li>Co-occurring disorders = SUD + mental health disorder simultaneously</li><li>E.g., depression + addiction (self-medication cycle)</li><li>Unique challenges in assessment & treatment</li></ul>
+        <div class="stage-row">
+          <div class="stage-num" style="background:#e6eef8;color:#1a3f6b">2</div>
+          <div class="stage-content">
+            <div class="stage-label">Contemplation <span class="stage-time" style="background:#e6eef8;color:#1a3f6b">Intends change within 6 months</span></div>
+            <div class="stage-desc">Aware; weighing pros & cons; ambivalent; considering change</div>
+          </div>
         </div>
-        <div class="card">
-          <h4 style="color:var(--u3)">Codependency</h4>
-          <ul><li>Dysfunctional focus on meeting others' needs</li><li>Not a diagnosable disorder</li><li>Enabling behaviour delays recovery</li><li>Stressful cycle — cushions consequences</li></ul>
+        <div class="stage-row">
+          <div class="stage-num" style="background:#fff3e6;color:#b5590a">3</div>
+          <div class="stage-content">
+            <div class="stage-label">Preparation <span class="stage-time" style="background:#fff3e6;color:#b5590a">Ready within 30 days</span></div>
+            <div class="stage-desc">Actively preparing; small steps; setting goals; seeking info</div>
+          </div>
         </div>
-        <div class="card">
-          <h4 style="color:var(--u3)">Obsession vs Addiction</h4>
-          <ul><li>Obsession: persistent thoughts; reduce anxiety; may resist it</li><li>Addiction: compulsive drug seeking; neurological disorder; unable to control despite wanting to</li></ul>
+        <div class="stage-row">
+          <div class="stage-num" style="background:#fdecea;color:#c0392b">4</div>
+          <div class="stage-content">
+            <div class="stage-label">Action <span class="stage-time" style="background:#fdecea;color:#c0392b">Changed within last 6 months</span></div>
+            <div class="stage-desc">Real behaviour change; typically stressful; detox/treatment begins</div>
+          </div>
+        </div>
+        <div class="stage-row">
+          <div class="stage-num" style="background:#e6f4ee;color:#1a6b4a">5</div>
+          <div class="stage-content">
+            <div class="stage-label">Maintenance <span class="stage-time" style="background:#e6f4ee;color:#1a6b4a">More than 6 months</span></div>
+            <div class="stage-desc">Sustaining change; preventing relapse; ongoing support & monitoring</div>
+          </div>
+        </div>
+        <div class="stage-row">
+          <div class="stage-num" style="background:#f0f0f0;color:#555">6</div>
+          <div class="stage-content">
+            <div class="stage-label">Termination <span class="stage-time" style="background:#f0f0f0;color:#555">Rarely achieved</span></div>
+            <div class="stage-desc">No desire to return; certain they won't relapse — often not included in programs</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- RELAPSE -->
   <div class="section">
-    <div class="section-head" onclick="toggle(this)">
-      <h3><span class="badge b3">Models</span> 8 Models of Addiction</h3>
+    <div class="section-head" onclick="tog(this)">
+      <h3><span class="tag u3-tag">Relapse</span> Relapse vs Slip & Prevention</h3>
       <span class="chevron">▼</span>
     </div>
     <div class="section-body">
-      <table>
-        <tr><th>Model</th><th>Core Idea</th><th>Key Concept</th></tr>
-        <tr><td><span class="kw">Social/Environmental</span></td><td>Social & environmental factors shape addiction as learned behaviour</td><td>Familial environment critical in early adolescence; poverty, stigma, access</td></tr>
-        <tr><td><span class="kw">Genetic</span></td><td>Genetic variations predispose to SUD — not deterministic</td><td>Dopamine, serotonin, GABA systems; twin & family studies</td></tr>
-        <tr><td><span class="kw">Personality</span></td><td>Certain traits predispose to addiction</td><td>Sensation-seeking, impulsivity, low conscientiousness, neuroticism; psychodynamic roots</td></tr>
-        <tr><td><span class="kw">Coping</span></td><td>Addiction as self-medication for negative emotions</td><td>Linked to dual diagnosis; explains relapse under stress</td></tr>
-        <tr><td><span class="kw">Social Learning</span></td><td>Learn addictive behaviours through observing others</td><td>Observational learning; vicarious reinforcement; media & role models</td></tr>
-        <tr><td><span class="kw">Conditioning</span></td><td>Rewards/punishments + environmental cues drive addiction</td><td>Classical (cues → craving); Operant (positive reinforcement of use)</td></tr>
-        <tr><td><span class="kw">Compulsive</span></td><td>Loss of control + compulsive behaviours despite consequences</td><td>Habit formation; disrupts brain reward/decision-making circuits</td></tr>
-        <tr><td><span class="kw">Biopsychosocial</span></td><td>Most widely accepted; complex interplay of Bio + Psycho + Social</td><td>Biological: genetics, brain chemistry | Psychological: personality, mental health | Social: family, peers, culture</td></tr>
-      </table>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-head" onclick="toggle(this)">
-      <h3><span class="badge b3">TTM</span> Transtheoretical Model (Stages of Change)</h3>
-      <span class="chevron">▼</span>
-    </div>
-    <div class="section-body">
-      <div class="def-box green">Developed by Prochaska & DiClemente (late 1970s) studying smokers. Focuses on individual decision-making and intentional change. People do NOT change quickly — they go through 6 stages.</div>
-      <table>
-        <tr><th>Stage</th><th>Key Feature</th><th>Timeframe</th></tr>
-        <tr><td><span class="kw">Precontemplation</span></td><td>Unaware problem exists; underestimates pros of change; denies consequences</td><td>No action within 6 months</td></tr>
-        <tr><td><span class="kw">Contemplation</span></td><td>Aware of need to change; weighing pros & cons; ambivalent</td><td>Intends to change within 6 months</td></tr>
-        <tr><td><span class="kw">Preparation</span></td><td>Actively preparing; small steps; setting goals; seeking info</td><td>Ready within 30 days</td></tr>
-        <tr><td><span class="kw">Action</span></td><td>Real behaviour change; coping skills; detox/treatment; typically stressful</td><td>Changed within last 6 months</td></tr>
-        <tr><td><span class="kw">Maintenance</span></td><td>Sustaining change; preventing relapse; ongoing support & self-monitoring</td><td>More than 6 months</td></tr>
-        <tr><td><span class="kw">Termination</span></td><td>No desire to return; certain won't relapse; rarely reached in practice</td><td>Rarely achieved</td></tr>
-      </table>
-      <h4 class="sub">Processes of Change</h4>
-      <div class="grid-2">
-        <div class="card">
-          <h4>Cognitive/Experiential (5)</h4>
-          <ul>
-            <li>Consciousness Raising</li>
-            <li>Emotional Arousal</li>
-            <li>Self Re-evaluation</li>
-            <li>Environmental Re-evaluation</li>
-            <li>Social Liberation</li>
-          </ul>
+      <div class="grid2">
+        <div class="card" style="background:#fdecea;border-color:#e07060">
+          <h4 style="color:#c0392b">🔴 Relapse</h4>
+          <ul><li>Significant return to use</li><li>Repeated use over time</li><li>Discouraging; sets progress back</li></ul>
         </div>
-        <div class="card">
-          <h4>Behavioural (4)</h4>
-          <ul>
-            <li>Self-Liberation</li>
-            <li>Stimulus Control</li>
-            <li>Reinforcement Management</li>
-            <li>Helping Relationships</li>
-          </ul>
+        <div class="card" style="background:#fff3e6;border-color:#e08040">
+          <h4 style="color:#b5590a">🟡 Slip</h4>
+          <ul><li>Brief, unplanned use</li><li>One-time or short-lived</li><li>Wake-up call; minor setback</li></ul>
         </div>
       </div>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-head" onclick="toggle(this)">
-      <h3><span class="badge b3">Relapse</span> Relapse vs Slip & Prevention</h3>
-      <span class="chevron">▼</span>
-    </div>
-    <div class="section-body">
-      <table>
-        <tr><th>Feature</th><th>Relapse</th><th>Slip</th></tr>
-        <tr><td>Definition</td><td>Significant return to use</td><td>Brief, unplanned use</td></tr>
-        <tr><td>Duration</td><td>Repeated use over time</td><td>One-time or short-lived</td></tr>
-        <tr><td>Impact</td><td>Discouraging; sets progress back</td><td>Wake-up call; minor setback</td></tr>
-      </table>
       <h4 class="sub">Prevention Steps</h4>
-      <ul class="clean">
-        <li><strong>1. Identify triggers</strong> — internal (motivation, cravings) and external (social support, environment)</li>
-        <li><strong>2. Coping strategies</strong> — cognitive restructuring, urge surfing, exposure therapy, avoid high-risk situations</li>
-        <li><strong>3. Build support system</strong> — therapy, support groups, healthy relationships</li>
-        <li><strong>4. Develop Relapse Prevention Plan</strong> — warning signs, coping strategies, healthy lifestyle, celebrate milestones</li>
-      </ul>
+      <div class="flow-steps">
+        <div class="flow-step" style="background:#e6f4ee;color:#1a6b4a;border:1.5px solid #4aac7d;font-size:0.75rem">1.<br>Identify<br><strong>Triggers</strong></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step" style="background:#e6eef8;color:#1a3f6b;border:1.5px solid #4a7cc4;font-size:0.75rem">2.<br>Coping<br><strong>Strategies</strong></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step" style="background:#ede7f6;color:#5c3d8f;border:1.5px solid #9c7cc4;font-size:0.75rem">3.<br>Build<br><strong>Support System</strong></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step" style="background:#fff3e6;color:#b5590a;border:1.5px solid #e08040;font-size:0.75rem">4.<br>Relapse<br><strong>Prevention Plan</strong></div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════ UNIT 4 ═══════════════ -->
+<!-- ════════════════════════ UNIT 4 ════════════════════════ -->
 <div class="panel" id="u4">
-  <div class="unit-header u4-bg">
-    <div class="unit-label" style="color:var(--u4)">Unit 4</div>
-    <h2>Testing & Assessment in Counselling</h2>
-    <p>Validity · Reliability · Standardisation · Test types · MMPI · MBTI · Assessment</p>
+  <div class="unit-banner u4-banner" data-emoji="📊">
+    <div>
+      <div class="unit-number">Unit 4</div>
+      <h2>Testing & Assessment in Counselling</h2>
+      <p>Validity · Reliability · Standardisation · Test types · MMPI-2 · MBTI · MSE · Assessment</p>
+    </div>
   </div>
 
   <div class="section open">
-    <div class="section-head" onclick="toggle(this)">
-      <h3><span class="badge b4">Core</span> Tests & Testing Overview</h3>
+    <div class="section-head" onclick="tog(this)">
+      <h3><span class="tag u4-tag">Core</span> Tests & Psychometrics</h3>
       <span class="chevron">▼</span>
     </div>
     <div class="section-body">
-      <div class="def-box yellow">Anastasi (1982): A psychological test is "an objective and standardised measure of behaviour." Scores have meaning only in relation to a person — a reflection of particular behaviour at a moment in time.</div>
-      <div class="grid-2">
-        <div class="card">
-          <h4 style="color:var(--u4)">Psychometrics</h4>
-          <ul><li>Comparing test scores to a norm-referenced group</li><li>Done by psychometrists</li></ul>
-        </div>
-        <div class="card">
-          <h4 style="color:var(--u4)">Edumetrics</h4>
-          <ul><li>Opposite of psychometrics</li><li>Client achievement compared to their own previous/best results</li><li>Constructivist approach</li></ul>
-        </div>
+      <div class="def-box u4-def"><strong>Anastasi (1982):</strong> "A psychological test is essentially an objective and standardised measure of behaviour." Scores have meaning only in relation to a person — a reflection of behaviour at a <em>moment in time.</em></div>
+      <div class="grid2">
+        <div class="card u4-card"><h4 style="color:var(--u4c)">📏 Psychometrics</h4><ul><li>Comparing test scores to a <strong>norm-referenced group</strong></li><li>Done by psychometrists</li><li>Norm-based comparison</li></ul></div>
+        <div class="card u4-card"><h4 style="color:var(--u4c)">📈 Edumetrics</h4><ul><li>Opposite of psychometrics</li><li>Client vs their own <strong>previous/best results</strong></li><li>Constructivist approach</li></ul></div>
       </div>
-      <h4 class="sub">Limitations of Tests</h4>
-      <ul class="clean">
-        <li>Encourages client dependency on external sources</li>
-        <li>Data can prejudice counsellor's picture of an individual</li>
-        <li>Often culturally biased, discriminatory</li>
-        <li>Measure irrelevant skills; invasion of privacy</li>
-        <li>Most problems = result of how tests are used, not the tests themselves</li>
-      </ul>
     </div>
   </div>
 
+  <!-- VALIDITY DIAGRAM -->
   <div class="section">
-    <div class="section-head" onclick="toggle(this)">
-      <h3><span class="badge b4">Quality</span> Validity, Reliability & Standardisation</h3>
+    <div class="section-head" onclick="tog(this)">
+      <h3><span class="tag u4-tag">Quality</span> Validity, Reliability & Standardisation</h3>
       <span class="chevron">▼</span>
     </div>
     <div class="section-body">
       <h4 class="sub">4 Types of Validity</h4>
-      <table>
-        <tr><th>Type</th><th>Definition</th><th>Used For</th></tr>
-        <tr><td><span class="kw">Content (Face)</span></td><td>Does the test appear to measure what it should? Fair sample of universe of factors</td><td>Achievement, aptitude, ability tests</td></tr>
-        <tr><td><span class="kw">Construct</span></td><td>Most important. What is the test really measuring? Degree to which it measures an intended hypothetical construct (e.g., empathy, intelligence)</td><td>Personality & interest inventories</td></tr>
-        <tr><td><span class="kw">Criterion</span></td><td>Comparison of test scores with actual performance. Concurrent (criterion available now) vs Predictive (criterion available later)</td><td>MMPI-2 (concurrent); SII (predictive)</td></tr>
-        <tr><td><span class="kw">Consequential</span></td><td>Newest type. Social implications/consequences of test use. Short & long-term effects on clients</td><td>All contexts</td></tr>
-      </table>
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 700 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:130px">
+          <rect width="700" height="130" fill="#faf8f5" rx="10"/>
+          <!-- Content -->
+          <rect x="10" y="15" width="158" height="100" rx="12" fill="#fff3e6" stroke="#e08040" stroke-width="1.5"/>
+          <text x="89" y="50" text-anchor="middle" font-size="18">📄</text>
+          <text x="89" y="70" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="11" font-weight="800" fill="#b5590a">Content</text>
+          <text x="89" y="83" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" fill="#905018">(Face) Validity</text>
+          <text x="89" y="98" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="8.5" fill="#905018">Appears to measure</text>
+          <text x="89" y="110" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="8.5" fill="#905018">what it should</text>
+          <!-- Construct - most important! -->
+          <rect x="178" y="15" width="158" height="100" rx="12" fill="#2d0050" stroke="#9c7cc4" stroke-width="1.5"/>
+          <text x="257" y="50" text-anchor="middle" font-size="18">🧩</text>
+          <text x="257" y="70" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="11" font-weight="800" fill="#e0c8ff">Construct ★</text>
+          <text x="257" y="83" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" fill="#c0a0ff">MOST IMPORTANT</text>
+          <text x="257" y="98" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="8.5" fill="#c0a0ff">"What is the test</text>
+          <text x="257" y="110" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="8.5" fill="#c0a0ff">really measuring?"</text>
+          <!-- Criterion -->
+          <rect x="346" y="15" width="158" height="100" rx="12" fill="#e6eef8" stroke="#4a7cc4" stroke-width="1.5"/>
+          <text x="425" y="50" text-anchor="middle" font-size="18">🎯</text>
+          <text x="425" y="70" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="11" font-weight="800" fill="#1a3f6b">Criterion</text>
+          <text x="425" y="83" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" fill="#2a5090">Concurrent vs</text>
+          <text x="425" y="98" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="8.5" fill="#2a5090">Predictive</text>
+          <text x="425" y="110" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="8.5" fill="#2a5090">MMPI-2 vs SII</text>
+          <!-- Consequential -->
+          <rect x="514" y="15" width="172" height="100" rx="12" fill="#e6f4ee" stroke="#4aac7d" stroke-width="1.5"/>
+          <text x="600" y="50" text-anchor="middle" font-size="18">🌍</text>
+          <text x="600" y="70" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="11" font-weight="800" fill="#1a6b4a">Consequential</text>
+          <text x="600" y="83" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" fill="#2a8055">Newest type</text>
+          <text x="600" y="98" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="8.5" fill="#2a8055">Social implications</text>
+          <text x="600" y="110" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="8.5" fill="#2a8055">of test use</text>
+        </svg>
+      </div>
+      <div class="def-box u4-def">⚠️ A test can be <strong>reliable without being valid</strong>, but cannot be valid without being reliable. Reliability = necessary but not sufficient condition for validity.</div>
       <h4 class="sub">3 Ways to Determine Reliability</h4>
-      <ul class="clean">
-        <li><strong>Test-retest</strong> — same test given again after time</li>
-        <li><strong>Parallel/Alternate-form</strong> — two equivalent forms administered</li>
-        <li><strong>Internal consistency (split-half)</strong> — scores of two halves compared</li>
-      </ul>
-      <div class="def-box yellow">⚠️ A test can be reliable without being valid, but cannot be valid without being reliable.</div>
-      <h4 class="sub">Standardisation & Norms</h4>
-      <p class="note"><strong>Standardisation</strong> = uniform conditions under which a test is administered and scored (allows comparison over time and across individuals). <strong>Norms</strong> = average performance scores for specified groups. Limitation: norms often established on majority population → may discriminate against minorities.</p>
+      <div class="grid3">
+        <div class="card u4-card"><h4>Test-Retest</h4><ul><li>Same test given again after a period of time</li></ul></div>
+        <div class="card u4-card"><h4>Parallel/Alternate Form</h4><ul><li>Two equivalent forms administered</li></ul></div>
+        <div class="card u4-card"><h4>Internal Consistency</h4><ul><li>Split-half: scores of two halves compared</li></ul></div>
+      </div>
     </div>
   </div>
 
+  <!-- TEST TYPES -->
   <div class="section">
-    <div class="section-head" onclick="toggle(this)">
-      <h3><span class="badge b4">Classification</span> Shertzer & Stone's 7 Classifications</h3>
+    <div class="section-head" onclick="tog(this)">
+      <h3><span class="tag u4-tag">High Yield</span> 4 Categories of Tests</h3>
       <span class="chevron">▼</span>
     </div>
     <div class="section-body">
-      <table>
-        <tr><th>Classification</th><th>Option A</th><th>Option B</th></tr>
-        <tr><td>1</td><td>Standardised (e.g., Self-Directed Search)</td><td>Non-standardised (e.g., experimental projective)</td></tr>
-        <tr><td>2</td><td>Individual (e.g., K-ABC)</td><td>Group (e.g., Minnesota School Attitude Survey)</td></tr>
-        <tr><td>3</td><td>Speed (time-limited, most achievement tests)</td><td>Power (generous time boundaries)</td></tr>
-        <tr><td>4</td><td>Performance (manipulate objects — e.g., WISC-IV Object Assembly)</td><td>Paper & Pencil (mark answers)</td></tr>
-        <tr><td>5</td><td>Objective (no scorer judgment — MCQ, T/F)</td><td>Subjective (scorer exercises judgment)</td></tr>
-        <tr><td>6</td><td>Maximum performance (do your best — IQ tests)</td><td>Typical performance (what you usually do — interest tests)</td></tr>
-        <tr><td>7</td><td>Norm-based (compare to group — IQ)</td><td>Criterion-based (compare to standard — reading test)</td></tr>
-      </table>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-head" onclick="toggle(this)">
-      <h3><span class="badge b4">Types</span> 4 Categories of Tests (High Yield)</h3>
-      <span class="chevron">▼</span>
-    </div>
-    <div class="section-body">
-      <h4 class="sub">1. Intelligence / Aptitude Tests</h4>
-      <p class="note">Originated with Alfred Binet (France, early 1900s). Stanford-Binet (Terman, 1916) was the revision.</p>
-      <p class="note"><strong>Wechsler Scales</strong> (most widely used):</p>
-      <ul class="clean">
-        <li><strong>WPPSI-III</strong> — Ages 2y6m to 7y3m</li>
-        <li><strong>WISC-IV</strong> — Ages 6–16</li>
-        <li><strong>WAIS-IV</strong> — Ages 16–89</li>
-      </ul>
-      <p class="note">Provides: Verbal IQ + Performance IQ + Full-Scale IQ. <strong>Aptitude tests</strong>: multi-aptitude batteries (SAT, ACT, DAT) or component ability tests (single skill).</p>
-      <div class="divider"></div>
-      <h4 class="sub">2. Interest / Career Tests</h4>
-      <ul class="clean">
-        <li><strong>Strong Interest Inventory (SII)</strong> — 1927 by E.K. Strong Jr.; linked to Holland's RIASEC theory; 3 result forms: General Occupational Themes, Basic Interest Scales, Occupational Scales</li>
-        <li><strong>Kuder Occupational Interest Survey (KOIS)</strong> — 1939; triad format (most/least preferred); 10 broad areas; Social, Persuasive, Clerical, Computational, Musical, Artistic, Literary, Mechanical, Outdoor, Scientific</li>
-        <li><strong>Career Beliefs Inventory (CBI)</strong> — Krumboltz; identifies beliefs blocking career choices; best used at start of counselling</li>
-      </ul>
-      <div class="divider"></div>
-      <h4 class="sub">3. Personality Tests</h4>
-      <div class="grid-2">
-        <div class="card">
-          <h4 style="color:var(--u4)">Objective</h4>
+      <div class="grid2">
+        <div class="card u4-card">
+          <h4 style="color:var(--u4c)">🧠 Intelligence / Aptitude</h4>
           <ul>
-            <li><strong>MMPI-2</strong>: Most widely used worldwide; 10 clinical scales; 3 validity scales (L, F, K); concurrent validity</li>
-            <li><strong>MBTI</strong>: Based on Carl Jung; 166 items; 4 indexes (EI, SN, TF, JP); 16 personality types</li>
-            <li><strong>16PF</strong>, CPI, STAI also notable</li>
+            <li>Origin: <strong>Alfred Binet</strong> (France, early 1900s)</li>
+            <li>Stanford-Binet (Terman, 1916)</li>
+            <li><strong>Wechsler scales:</strong> WPPSI-III (2y6m–7y3m), WISC-IV (6–16), WAIS-IV (16–89)</li>
+            <li>Yields Verbal IQ + Performance IQ + Full-Scale IQ</li>
           </ul>
         </div>
-        <div class="card">
-          <h4 style="color:var(--u4)">Projective</h4>
+        <div class="card u4-card">
+          <h4 style="color:var(--u4c)">💼 Interest / Career</h4>
           <ul>
-            <li><strong>Rorschach</strong> (1921): 10 inkblots; evaluates psychotic vs non-psychotic thoughts; not used extensively in counselling</li>
-            <li><strong>TAT</strong>: Thematic Apperception Test</li>
-            <li><strong>HTP</strong>: House-Tree-Person</li>
-            <li>Valuable in multicultural settings (minimal words)</li>
+            <li><strong>SII</strong> (Strong, 1927) — RIASEC theory; Concurrent validity; Predictive validity</li>
+            <li><strong>KOIS</strong> (Kuder, 1939) — triad format; 10 areas</li>
+            <li><strong>CBI</strong> (Krumboltz) — beliefs blocking career choices</li>
+          </ul>
+        </div>
+        <div class="card u4-card">
+          <h4 style="color:var(--u4c)">🎭 Personality — Objective</h4>
+          <ul>
+            <li><strong>MMPI-2</strong> — most used worldwide; 10 clinical scales; 3 validity scales (L, F, K); <em>concurrent validity</em></li>
+            <li><strong>MBTI</strong> — Carl Jung; 166 items; EI, SN, TF, JP → 16 types</li>
+            <li>Also: 16PF, CPI, STAI</li>
+          </ul>
+        </div>
+        <div class="card u4-card">
+          <h4 style="color:var(--u4c)">🖼️ Personality — Projective</h4>
+          <ul>
+            <li><strong>Rorschach</strong> (1921) — 10 inkblots; psychotic vs non-psychotic; NOT used extensively in counselling</li>
+            <li><strong>TAT</strong> — Thematic Apperception Test</li>
+            <li><strong>HTP</strong> — House-Tree-Person</li>
+            <li>Valuable in multicultural settings</li>
           </ul>
         </div>
       </div>
-      <div class="divider"></div>
-      <h4 class="sub">4. Achievement Tests</h4>
-      <p class="note">Measure degree of accomplishment/learning in a subject. More direct than other tests. Can be teacher-made OR standardised. Examples: Iowa Tests of Basic Skills, Stanford Achievement Test, GED, National Counsellor Examination (NCE).</p>
+      <div class="card u4-card" style="margin-top:10px">
+        <h4 style="color:var(--u4c)">📚 Achievement Tests</h4>
+        <p style="font-size:0.8rem">Measure accomplishment in a subject. Most direct. Can be teacher-made OR standardised. Examples: Iowa Tests of Basic Skills, Stanford Achievement Test, GED, <strong>National Counsellor Examination (NCE)</strong>.</p>
+      </div>
     </div>
   </div>
 
+  <!-- MSE & ASSESSMENT -->
   <div class="section">
-    <div class="section-head" onclick="toggle(this)">
-      <h3><span class="badge b4">Admin</span> Administration, Interpretation & Assessment</h3>
+    <div class="section-head" onclick="tog(this)">
+      <h3><span class="tag u4-tag">Assessment</span> Mental Status Examination & Assessment</h3>
       <span class="chevron">▼</span>
     </div>
     <div class="section-body">
-      <h4 class="sub">4 Basic Test Interpretations</h4>
-      <div class="grid-2">
-        <div class="card"><h4 style="color:var(--u4)">1. Descriptive</h4><ul><li>Current status of the test taker</li></ul></div>
-        <div class="card"><h4 style="color:var(--u4)">2. Genetic</h4><ul><li>How the person got to be this way</li></ul></div>
-        <div class="card"><h4 style="color:var(--u4)">3. Predictive</h4><ul><li>Forecasting future performance</li></ul></div>
-        <div class="card"><h4 style="color:var(--u4)">4. Evaluative</h4><ul><li>Recommendations by the test interpreter</li></ul></div>
+      <div class="def-box u4-def">Cormier & Cormier (1998): Assessment has <strong>6 purposes</strong> — (1) obtain info on presenting problem, (2) identify contributing variables, (3) determine client goals, (4) gather baseline data, (5) educate & motivate client, (6) plan effective treatment.</div>
+      <h4 class="sub">Mental Status Examination (MSE) — 6 Categories</h4>
+      <div class="grid2">
+        <div class="card u4-card"><h4>i. Appearance, Attitude, Activity</h4><ul><li>Physical characteristics; approach to interview; motor movement</li></ul></div>
+        <div class="card u4-card"><h4>ii. Mood & Affect</h4><ul><li>Mood = internal feeling state; Affect = outward expression</li></ul></div>
+        <div class="card u4-card"><h4>iii. Speech & Language</h4><ul><li>Ability to express oneself; comprehend word meaning</li></ul></div>
+        <div class="card u4-card"><h4>iv. Thought Process, Content & Perception</h4><ul><li>Org, flow & production of thought; delusions, hallucinations</li></ul></div>
+        <div class="card u4-card"><h4>v. Cognition</h4><ul><li>Logic, intellect, reasoning, memory</li></ul></div>
+        <div class="card u4-card"><h4>vi. Insight & Judgment</h4><ul><li>Awareness of personality traits; ability to consider long-term outcomes</li></ul></div>
       </div>
-      <h4 class="sub">Miller's 5-Step Interpretation Plan</h4>
-      <ul class="clean">
-        <li>1. Client recalls feelings on test day & gives impressions</li>
-        <li>2. Review purpose of testing & how scores are presented</li>
-        <li>3. Examine results together; ask open-ended questions</li>
-        <li>4. Client integrates scores with other self-knowledge</li>
-        <li>5. Incorporate all knowledge into client-originated plan for self-study</li>
-      </ul>
-      <div class="divider"></div>
-      <h4 class="sub">Assessment (Beyond Testing)</h4>
-      <div class="def-box yellow">Cormier & Cormier (1998): Assessment has 6 purposes — (1) obtain info on presenting problem, (2) identify contributing variables, (3) determine client goals, (4) gather baseline data, (5) educate & motivate client, (6) plan effective treatment interventions.</div>
-      <h4 class="sub">Mental Status Examination (MSE)</h4>
-      <p class="note">Not a formal psychometric instrument but increasingly used. Organises objective (observations) and subjective (client data) in 6 categories:</p>
-      <ul class="clean">
-        <li>i. Appearance, Attitude, Activity</li>
-        <li>ii. Mood & Affect</li>
-        <li>iii. Speech & Language</li>
-        <li>iv. Thought Process, Content & Perception</li>
-        <li>v. Cognition</li>
-        <li>vi. Insight & Judgment</li>
-      </ul>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════ QUIZ ═══════════════ -->
+<!-- ════════════════════════ QUIZ ════════════════════════ -->
 <div class="panel" id="quiz">
-  <div class="quiz-header">
+  <div class="quiz-banner">
     <h2>Self-Test Quiz</h2>
-    <p>25 questions across all 4 units — test yourself before the exam!</p>
+    <p>25 questions across all 4 units — randomised every time you start!</p>
     <div class="quiz-controls">
-      <button class="btn btn-quiz" onclick="startQuiz()">Start Quiz</button>
-      <button class="btn btn-outline" onclick="resetQuiz()">Reset</button>
-    </div>
-    <div class="progress-bar" id="progressBar" style="display:none; margin-top:12px;">
-      <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      <button class="btn btn-start" onclick="startQuiz()">▶ Start Quiz</button>
+      <button class="btn btn-reset" onclick="resetQuiz()">↺ Reset</button>
     </div>
   </div>
-  <div id="quizContainer"></div>
-  <div class="score-box" id="scoreBox">
+  <div class="progress-wrap" id="progWrap" style="display:none">
+    <div class="progress-bar" id="progBar" style="width:0%"></div>
+  </div>
+  <div id="quizBox"></div>
+  <div class="score-card" id="scoreCard">
     <h3>Quiz Complete! 🎉</h3>
-    <div class="score" id="finalScore">0/25</div>
-    <p id="scoreMsg"></p>
-    <button class="btn btn-quiz" onclick="resetQuiz()" style="margin-top:16px;">Try Again</button>
+    <div class="big-score" id="bigScore">-/-</div>
+    <div class="score-msg" id="scoreMsg"></div>
+    <div class="score-badge" id="scoreBadge"></div>
+    <br>
+    <button class="btn" style="background:var(--qc);color:white;margin-top:12px" onclick="resetQuiz()">Try Again</button>
+  </div>
+</div>
+
+<!-- ════════════════════════ WORKBOOK ════════════════════════ -->
+<div class="panel" id="wb">
+  <div class="wb-banner">
+    <h2>Workbook — Active Recall</h2>
+    <p>Write your answers first, then reveal. This is the fastest way to learn! 🧠</p>
+  </div>
+
+  <!-- Section 1: Fill in the Blanks -->
+  <div class="wb-section">
+    <div class="wb-head">
+      <div class="wb-icon">✏️</div>
+      <div>
+        <h3>Fill in the Blanks</h3>
+        <p>Complete each sentence from memory, then check.</p>
+      </div>
+    </div>
+    <div class="wb-body">
+
+      <div class="wb-q">
+        <label>1. Gazda defines group counselling as a dynamic __________ process focusing on __________ thought and behaviours.</label>
+        <div class="fill-blanks">
+          <span>interpersonal</span><input class="blank-input" id="f1a" placeholder="___"> <span>process focusing on</span> <input class="blank-input" id="f1b" placeholder="___"> <span>thought</span>
+        </div>
+        <button class="fill-check-btn" onclick="checkFill('f1a','interpersonal','f1b','conscious')">Check</button>
+        <div class="fill-result" id="f1r"></div>
+      </div>
+
+      <div class="wb-q">
+        <label>2. The Gottman Method's four negative communication patterns are: Criticism, __________, Defensiveness, and __________.</label>
+        <div class="fill-blanks">
+          <input class="blank-input" id="f2a" placeholder="___"> <span>and</span> <input class="blank-input" id="f2b" placeholder="___">
+        </div>
+        <button class="fill-check-btn" onclick="checkFill('f2a','contempt','f2b','stonewalling')">Check</button>
+        <div class="fill-result" id="f2r"></div>
+      </div>
+
+      <div class="wb-q">
+        <label>3. The TTM was developed by __________ and __________ in the late __________.</label>
+        <div class="fill-blanks">
+          <input class="blank-input" id="f3a" placeholder="Name 1"> <span>and</span> <input class="blank-input" id="f3b" placeholder="Name 2"> <span>in the late</span> <input class="blank-input" id="f3c" placeholder="decade" style="width:60px">
+        </div>
+        <button class="fill-check-btn" onclick="checkFill3('f3a','prochaska','f3b','diclemente','f3c','1970s')">Check</button>
+        <div class="fill-result" id="f3r"></div>
+      </div>
+
+      <div class="wb-q">
+        <label>4. In construct validity, the fundamental question asked is: "__________ is the test really __________?"</label>
+        <div class="fill-blanks">
+          <span>"</span><input class="blank-input" id="f4a" placeholder="___"> <span>is the test really</span> <input class="blank-input" id="f4b" placeholder="___"><span>?"</span>
+        </div>
+        <button class="fill-check-btn" onclick="checkFill('f4a','what','f4b','measuring')">Check</button>
+        <div class="fill-result" id="f4r"></div>
+      </div>
+
+      <div class="wb-q">
+        <label>5. The MHCA 2017 was passed on __________ and came into force on __________.</label>
+        <div class="fill-blanks">
+          <input class="blank-input" id="f5a" placeholder="date" style="width:140px"> <span>and came into force</span> <input class="blank-input" id="f5b" placeholder="date" style="width:140px">
+        </div>
+        <button class="fill-check-btn" onclick="checkFill('f5a','7 april 2017','f5b','7 july 2018')">Check</button>
+        <div class="fill-result" id="f5r"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: Short Answer -->
+  <div class="wb-section">
+    <div class="wb-head">
+      <div class="wb-icon">💬</div>
+      <div>
+        <h3>Short Answer Questions</h3>
+        <p>Write your answer, then reveal the model answer.</p>
+      </div>
+    </div>
+    <div class="wb-body">
+
+      <div class="wb-q">
+        <label>Q1. What are the 3 stages of EFT and what does each achieve?</label>
+        <textarea class="wb-input medium" placeholder="Write your answer here..."></textarea>
+        <div style="margin-top:6px;display:flex;gap:8px;align-items:center">
+          <button class="wb-reveal-btn" onclick="reveal('a1')">Reveal Answer</button>
+        </div>
+        <div class="wb-answer" id="a1">
+          <strong>Stage 1 — De-escalation:</strong> Address negative patterns & emotional reactivity; create a safe emotional space.<br>
+          <strong>Stage 2 — Restructuring:</strong> Identify & reshape emotional responses; foster new positive communication patterns.<br>
+          <strong>Stage 3 — Consolidation:</strong> Strengthen changes from stages 1 & 2; promote ongoing growth & connection.
+        </div>
+      </div>
+
+      <div class="wb-q">
+        <label>Q2. List the 6 ethical principles in counselling and give one sentence on each.</label>
+        <textarea class="wb-input medium" placeholder="Write your answer here..."></textarea>
+        <button class="wb-reveal-btn" onclick="reveal('a2')">Reveal Answer</button>
+        <div class="wb-answer" id="a2">
+          1. <strong>Autonomy</strong> — Respect client's right to self-govern; no manipulation.<br>
+          2. <strong>Beneficence</strong> — Act in client's best interest; keep updating knowledge.<br>
+          3. <strong>Non-maleficence</strong> — Avoid all forms of harm (sexual, financial, emotional).<br>
+          4. <strong>Justice</strong> — Fair, impartial, equal service; no discrimination.<br>
+          5. <strong>Confidentiality</strong> — Ethical (not legal) duty to protect client information.<br>
+          6. <strong>Self-Respect</strong> — Counsellor's own self-care, supervision, and continued growth.
+        </div>
+      </div>
+
+      <div class="wb-q">
+        <label>Q3. Distinguish between Psychometrics and Edumetrics.</label>
+        <textarea class="wb-input small" placeholder="Write your answer here..."></textarea>
+        <button class="wb-reveal-btn" onclick="reveal('a3')">Reveal Answer</button>
+        <div class="wb-answer" id="a3">
+          <strong>Psychometrics:</strong> Comparing a person's test scores to a norm-referenced group (standardised comparison). Done by psychometrists.<br>
+          <strong>Edumetrics:</strong> Constructivist opposite — compares a client's achievement to their own previous and best results (self-referenced).
+        </div>
+      </div>
+
+      <div class="wb-q">
+        <label>Q4. What is the Biopsychosocial model of addiction? Why is it considered most comprehensive?</label>
+        <textarea class="wb-input medium" placeholder="Write your answer here..."></textarea>
+        <button class="wb-reveal-btn" onclick="reveal('a4')">Reveal Answer</button>
+        <div class="wb-answer" id="a4">
+          The Biopsychosocial model is the most widely accepted approach. It moves away from seeing addiction as a moral failing and acknowledges the complex interplay of:<br>
+          • <strong>Biological</strong> — genetic predispositions, brain chemistry, neurobiology, physiological responses<br>
+          • <strong>Psychological</strong> — personality traits, cognitive processes, emotional regulation, mental health conditions<br>
+          • <strong>Social</strong> — family dynamics, peer influences, socioeconomic status, cultural norms, environmental stressors<br>
+          It is comprehensive because no single factor explains addiction — all three dimensions interact.
+        </div>
+      </div>
+
+      <div class="wb-q">
+        <label>Q5. What are the Four Horsemen? Which is considered most destructive and why?</label>
+        <textarea class="wb-input medium" placeholder="Write your answer here..."></textarea>
+        <button class="wb-reveal-btn" onclick="reveal('a5')">Reveal Answer</button>
+        <div class="wb-answer" id="a5">
+          The Four Horsemen (Gottman Method) are negative communication patterns:<br>
+          1. <strong>Criticism</strong> — global negative statements about character<br>
+          2. <strong>Contempt</strong> — disdain, superiority, eye-rolling, sarcasm, name-calling (★ MOST DESTRUCTIVE)<br>
+          3. <strong>Defensiveness</strong> — deflecting blame, making excuses, counter-complaining<br>
+          4. <strong>Stonewalling</strong> — withdrawal, silent treatment, refusing to engage<br>
+          Contempt is most destructive because it communicates fundamental disrespect and superiority — it actively undermines the partner's sense of worth.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3: Matching -->
+  <div class="wb-section">
+    <div class="wb-head">
+      <div class="wb-icon">🔗</div>
+      <div>
+        <h3>Match the Theorist to the Therapy</h3>
+        <p>Click a name, then click their therapy. 4 correct matches!</p>
+      </div>
+    </div>
+    <div class="wb-body">
+      <div id="matchMsg" style="font-size:0.82rem;color:var(--muted);margin-bottom:10px">Select a name from the left, then click the matching therapy on the right.</div>
+      <div class="match-game">
+        <div class="match-col">
+          <h5>Theorist / Creator</h5>
+          <div class="match-item" id="m-minuchin" onclick="matchClick('minuchin','Structural Family Therapy')">Salvador Minuchin</div>
+          <div class="match-item" id="m-levine" onclick="matchClick('levine','Somatic Experiencing Therapy')">Dr. Peter Levine</div>
+          <div class="match-item" id="m-bowen" onclick="matchClick('bowen','Bowenian Family Therapy')">Murray Bowen</div>
+          <div class="match-item" id="m-gottman" onclick="matchClick('gottman','Gottman Method')">John & Julie Gottman</div>
+        </div>
+        <div class="match-col">
+          <h5>Therapy / Model</h5>
+          <div class="match-item" id="t-Somatic Experiencing Therapy" onclick="matchTarget('Somatic Experiencing Therapy')">Somatic Experiencing Therapy</div>
+          <div class="match-item" id="t-Gottman Method" onclick="matchTarget('Gottman Method')">Gottman Method</div>
+          <div class="match-item" id="t-Structural Family Therapy" onclick="matchTarget('Structural Family Therapy')">Structural Family Therapy</div>
+          <div class="match-item" id="t-Bowenian Family Therapy" onclick="matchTarget('Bowenian Family Therapy')">Bowenian Family Therapy</div>
+        </div>
+      </div>
+      <button class="fill-check-btn" onclick="resetMatch()" style="margin-top:8px">Reset Matching</button>
+      <div class="fill-result" id="matchResult"></div>
+    </div>
+  </div>
+
+  <!-- Section 4: Recall prompts -->
+  <div class="wb-section">
+    <div class="wb-head">
+      <div class="wb-icon">🧠</div>
+      <div>
+        <h3>Brain Dump — Key Lists</h3>
+        <p>Write everything you remember, then reveal the full list.</p>
+      </div>
+    </div>
+    <div class="wb-body">
+      <div class="wb-q">
+        <label>List all 6 TTM stages of change in order with their timeframes:</label>
+        <textarea class="wb-input medium" placeholder="1. ... (timeframe)&#10;2. ...&#10;3. ...&#10;4. ...&#10;5. ...&#10;6. ..."></textarea>
+        <button class="wb-reveal-btn" onclick="reveal('a6')">Reveal</button>
+        <div class="wb-answer" id="a6">
+          1. <strong>Precontemplation</strong> — no action within 6 months<br>
+          2. <strong>Contemplation</strong> — intends to change within 6 months<br>
+          3. <strong>Preparation</strong> — ready to act within 30 days<br>
+          4. <strong>Action</strong> — changed within last 6 months<br>
+          5. <strong>Maintenance</strong> — sustained change for more than 6 months<br>
+          6. <strong>Termination</strong> — no desire to return; rarely achieved
+        </div>
+      </div>
+
+      <div class="wb-q">
+        <label>Name the 10 rights under the Mental Health Care Act 2017:</label>
+        <textarea class="wb-input medium" placeholder="1. Right to...&#10;2. Right to...&#10;..."></textarea>
+        <button class="wb-reveal-btn" onclick="reveal('a7')">Reveal</button>
+        <div class="wb-answer" id="a7">
+          1. Advance Directive | 2. Access Healthcare | 3. Free Healthcare (BPL/homeless) | 4. Live in Community | 5. Protection from Cruel Treatment | 6. No Prohibited Treatment (ECT banned for children) | 7. Equality & Non-Discrimination | 8. Right to Information | 9. Confidentiality | 10. Legal Aid & Complaint
+        </div>
+      </div>
+
+      <div class="wb-q">
+        <label>List all 8 models of addiction:</label>
+        <textarea class="wb-input medium" placeholder="1.&#10;2.&#10;3.&#10;..."></textarea>
+        <button class="wb-reveal-btn" onclick="reveal('a8')">Reveal</button>
+        <div class="wb-answer" id="a8">
+          1. Social/Environmental | 2. Genetic | 3. Personality | 4. Coping | 5. Social Learning | 6. Conditioning | 7. Compulsive | 8. <strong>Biopsychosocial</strong> (most widely accepted)
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
 </main>
 
 <script>
-// Tab switching
-document.querySelectorAll('.tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-    tab.classList.add('active');
-    document.getElementById(tab.dataset.tab).classList.add('active');
-    window.scrollTo(0, 0);
+// ═══ THEME TOGGLE ═══
+const themeToggle = document.getElementById('themeToggle');
+const savedTheme = localStorage.getItem('study-theme');
+if (savedTheme === 'dark') {
+  document.documentElement.classList.add('dark');
+}
+updateThemeToggle();
+
+themeToggle.addEventListener('click', () => {
+  document.documentElement.classList.toggle('dark');
+  const mode = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+  localStorage.setItem('study-theme', mode);
+  updateThemeToggle();
+});
+
+function updateThemeToggle() {
+  const dark = document.documentElement.classList.contains('dark');
+  themeToggle.textContent = dark ? '☀️ Light' : '🌙 Dark';
+  themeToggle.setAttribute('aria-pressed', dark ? 'true' : 'false');
+}
+
+// ═══ TAB SWITCHING ═══
+document.querySelectorAll('.tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById(t.dataset.tab).classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
   });
 });
 
-// Accordion
-function toggle(head) {
-  const section = head.parentElement;
-  section.classList.toggle('open');
+// ═══ ACCORDION ═══
+function tog(head) { head.parentElement.classList.toggle('open'); }
+
+// ═══ WORKBOOK REVEAL ═══
+function reveal(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('show');
 }
 
-// Quiz Data
-const questions = [
-  // Unit 1
-  { u: 1, q: "According to Gazda, what is group counselling primarily focused on?", opts: ["Unconscious motivation and past trauma", "Conscious thought, behaviours, and interpersonal process", "Medication management and symptom reduction", "Standardised testing and diagnosis"], ans: 1, exp: "Gazda defines group counselling as a dynamic interpersonal process focusing on conscious thought and behaviours — not unconscious motivation (that's T groups' distinction)." },
-  { u: 1, q: "T Groups (Training Groups) differ from therapy groups primarily because they:", opts: ["Deal with more severely disturbed individuals", "Focus on unconscious motivation and genetic causes", "Assume participants are well and focus on present behaviour", "Are always conducted in a hospital setting"], ans: 2, exp: "T Groups assume participants are well, deal with conscious/preconscious (not unconscious) behaviour, and use data about present behaviour rather than genetic causes." },
-  { u: 1, q: "The recommended group size for group counselling is:", opts: ["2–4 members", "4–12 members", "15–20 members", "20+ members"], ans: 1, exp: "Gazda states one counsellor is involved with 4–12 counselees. Larger groups weaken collateral relationships and increase counsellor-dependency." },
-  { u: 1, q: "Which of the following should NOT be included in a counselling group?", opts: ["Someone with communication anxiety", "Very aggressive or extremely shy individuals", "People with varied problems", "Both men and women"], ans: 1, exp: "The very aggressive, extremely shy, and seriously maladjusted make poor members of a 'normal' group. Close friends/relatives should also be kept apart." },
-  { u: 1, q: "Confidentiality in counselling is best described as:", opts: ["A legal concept governed by court orders", "An ethical concept and professional duty", "The same as privileged communication", "Optional based on client preference"], ans: 1, exp: "Confidentiality is primarily an ethical concept — a professional duty. Privileged communication is the legal concept." },
-  { u: 1, q: "Which ethical principle focuses on fostering the practitioner's own self-care and self-knowledge?", opts: ["Beneficence", "Non-maleficence", "Self-Respect", "Autonomy"], ans: 2, exp: "Self-Respect involves fostering the practitioner's self-knowledge, seeking supervision, and continuing professional development." },
-  { u: 1, q: "The Mental Health Care Act 2017 came into force on:", opts: ["7 April 2017", "22 May 1987", "7 July 2018", "1 January 2018"], ans: 2, exp: "The MHCA was passed on 7 April 2017 but came into force from 7 July 2018. It superseded the 1987 Act." },
-  { u: 1, q: "Under the MHCA 2017, electroconvulsive therapy (ECT) is:", opts: ["Completely banned for all individuals", "Allowed without restrictions for adults only", "Completely banned for children; allowed for adults with anaesthesia and muscle relaxants", "Only allowed in private hospitals"], ans: 2, exp: "ECT is completely prohibited for children. For adults, precautions like muscle relaxants and anaesthesia are required." },
-  // Unit 2
-  { u: 2, q: "The 'Four Horsemen of the Apocalypse' in Gottman Method refers to:", opts: ["4 stages of marital dissolution", "4 negative communication patterns that damage relationships", "4 goals of couples therapy", "4 attachment styles"], ans: 1, exp: "The Four Horsemen (Criticism, Contempt, Defensiveness, Stonewalling) are negative communication patterns identified by Gottman as indicators of relationship trouble." },
-  { u: 2, q: "Contempt in the Gottman Method is:", opts: ["Expressing a specific complaint about behaviour", "Withdrawing from interaction", "Expressing disdain or superiority; the most destructive of the four", "Deflecting blame and making excuses"], ans: 2, exp: "Contempt is the most intense — involves disdain, superiority, eye-rolling, sarcasm, and name-calling. It is considered the most destructive of the Four Horsemen." },
-  { u: 2, q: "EFT (Emotionally Focused Therapy) is grounded in which theory?", opts: ["Social learning theory", "Attachment theory", "Cognitive-behavioural theory", "Psychodynamic theory"], ans: 1, exp: "EFT, developed by Sue Johnson & Les Greenberg, is grounded in attachment theory — emphasising secure emotional bonds in adult relationships." },
-  { u: 2, q: "Which family therapy approach was developed by Salvador Minuchin?", opts: ["Strategic Family Therapy", "Narrative Therapy", "Structural Family Therapy", "Bowenian Family Therapy"], ans: 2, exp: "Structural Family Therapy was developed by Salvador Minuchin. It focuses on restructuring family systems, boundaries, and hierarchies." },
-  { u: 2, q: "In Bowenian Family Therapy, 'Triangulation' refers to:", opts: ["Three-phase treatment model", "When two family members pull a third person into their conflict", "A genogram technique", "The three core emotions in family conflict"], ans: 1, exp: "Triangulation occurs when two family members pull a third into their conflict, creating unhealthy emotional alliances." },
-  { u: 2, q: "EMDR therapy uses bilateral stimulation, which can include:", opts: ["Family sculpting and role plays", "Side-to-side eye movements, tapping, or auditory tones", "Narrative re-authoring and genograms", "CBT thought records and behavioural experiments"], ans: 1, exp: "EMDR uses bilateral (both hemispheres) stimulation: side-to-side eye movements, tactile tapping, or auditory tones while recalling distressing memories." },
-  { u: 2, q: "SFBT (Solution-Focused Brief Therapy) typically consists of:", opts: ["Open-ended long-term sessions (1–2 years)", "6–12 limited sessions", "Only group sessions", "Intensive daily sessions for 1 month"], ans: 1, exp: "SFBT is brief — usually limited to 6–12 sessions. It focuses on solutions and strengths rather than dwelling on problems." },
-  // Unit 3
-  { u: 3, q: "The Transtheoretical Model (TTM) was developed by:", opts: ["Bandura & Mischel", "Prochaska & DiClemente", "Beck & Ellis", "Levine & Johnson"], ans: 1, exp: "TTM was developed by Prochaska & DiClemente in the late 1970s through studying smokers who quit on their own vs those requiring treatment." },
-  { u: 3, q: "In the Precontemplation stage of TTM, the person:", opts: ["Is ready to take action within 30 days", "Has recently changed behaviour", "Does not intend to take action in the next 6 months", "Is weighing pros and cons of changing"], ans: 2, exp: "Precontemplation: person is unaware their behaviour is problematic and does not intend to take action within the next 6 months." },
-  { u: 3, q: "Which stage of TTM involves real behaviour change that started within the last 6 months?", opts: ["Contemplation", "Preparation", "Action", "Maintenance"], ans: 2, exp: "Action stage: real behaviour change starts here, within the last 6 months. Typically stressful but manageable with good preparation." },
-  { u: 3, q: "The Biopsychosocial Model of addiction is considered:", opts: ["The least evidence-based model", "The most widely accepted and comprehensive approach", "Focused only on genetic factors", "A moral/willpower model"], ans: 1, exp: "The Biopsychosocial Model is the most widely accepted and comprehensive — it acknowledges the complex interplay of biological, psychological, and social factors." },
-  { u: 3, q: "Dual diagnosis refers to:", opts: ["Two counsellors treating one client", "The presence of both SUD and a mental health disorder simultaneously", "Two separate substance addictions", "Diagnosing addiction and relapse together"], ans: 1, exp: "Dual diagnosis = co-occurring disorders — both a substance use disorder AND a mental health disorder (e.g., depression + addiction) present simultaneously." },
-  { u: 3, q: "Which of the following is a 'Behavioural' process of change in the TTM?", opts: ["Consciousness Raising", "Emotional Arousal", "Self Re-evaluation", "Stimulus Control"], ans: 3, exp: "Stimulus Control is a Behavioural process (along with Self-Liberation, Reinforcement Management, Helping Relationships). The others listed are Cognitive/Experiential processes." },
-  // Unit 4
-  { u: 4, q: "Which type of validity asks 'What is the test really measuring?' and is considered the most important?", opts: ["Content validity", "Criterion validity", "Construct validity", "Consequential validity"], ans: 2, exp: "Construct validity is the most important — it asks the fundamental question about what the test is really measuring (e.g., empathy, intelligence). Applied to personality & interest inventories." },
-  { u: 4, q: "The MMPI-2 has which type of validity?", opts: ["Predictive validity", "Concurrent validity", "Content validity", "Face validity"], ans: 1, exp: "MMPI-2 has concurrent validity (criterion available at time of testing). The Strong Interest Inventory (SII) has predictive validity (criterion available after)." },
-  { u: 4, q: "The Myers-Briggs Type Indicator (MBTI) is based on whose theory of personality?", opts: ["Sigmund Freud", "Abraham Maslow", "Carl Jung", "Alfred Adler"], ans: 2, exp: "MBTI reflects Carl Jung's theory of personality type. It contains 166 two-choice items and yields 16 possible personality types across 4 indexes (EI, SN, TF, JP)." },
-  { u: 4, q: "Edumetrics differs from Psychometrics in that it:", opts: ["Compares a client to a norm-referenced group", "Compares a client's achievement to their own previous and best results", "Is used only for intelligence testing", "Focuses on group test administration"], ans: 1, exp: "Edumetrics (constructivist) compares the client to their own previous/best performance. Psychometrics compares the client to a norm-referenced group." }
+// ═══ FILL IN BLANKS ═══
+function checkFill(id1, ans1, id2, ans2) {
+  const v1 = document.getElementById(id1).value.trim().toLowerCase();
+  const v2 = document.getElementById(id2).value.trim().toLowerCase();
+  const num = id1.replace(/[a-z]/g,'');
+  const res = document.getElementById('f'+num+'r');
+  const ok1 = v1.includes(ans1.toLowerCase());
+  const ok2 = v2.includes(ans2.toLowerCase());
+  if (ok1 && ok2) {
+    res.style.color = '#1a6b4a'; res.textContent = '✓ Correct! Both blanks right.';
+  } else {
+    res.style.color = '#c0392b'; res.textContent = '✗ Not quite. Answers: "'+ans1+'" and "'+ans2+'"';
+  }
+}
+
+function checkFill3(id1,a1,id2,a2,id3,a3) {
+  const v1 = document.getElementById(id1).value.trim().toLowerCase();
+  const v2 = document.getElementById(id2).value.trim().toLowerCase();
+  const v3 = document.getElementById(id3).value.trim().toLowerCase();
+  const res = document.getElementById('f3r');
+  const ok = v1.includes(a1) && v2.includes(a2) && v3.includes(a3);
+  if (ok) { res.style.color='#1a6b4a'; res.textContent='✓ Correct! Prochaska & DiClemente, late 1970s.'; }
+  else { res.style.color='#c0392b'; res.textContent='✗ Answers: Prochaska / DiClemente / 1970s'; }
+}
+
+// ═══ MATCHING ═══
+let selectedName = null;
+let selectedTherapy = null;
+const matchAnswers = {
+  'minuchin':'Structural Family Therapy',
+  'levine':'Somatic Experiencing Therapy',
+  'bowen':'Bowenian Family Therapy',
+  'gottman':'Gottman Method'
+};
+let matchedCount = 0;
+
+function matchClick(name, therapy) {
+  const el = document.getElementById('m-'+name);
+  if (el.classList.contains('matched-correct')) return;
+  // clear previous selection
+  document.querySelectorAll('.match-item').forEach(i => { if (!i.classList.contains('matched-correct') && !i.classList.contains('matched-wrong')) i.classList.remove('selected'); });
+  el.classList.add('selected');
+  selectedName = name;
+  if (selectedTherapy) tryMatch();
+}
+
+function matchTarget(therapy) {
+  const el = document.getElementById('t-'+therapy);
+  if (el.classList.contains('matched-correct')) return;
+  document.querySelectorAll('.match-item').forEach(i => { if (i.id && i.id.startsWith('t-') && !i.classList.contains('matched-correct')) i.classList.remove('selected'); });
+  el.classList.add('selected');
+  selectedTherapy = therapy;
+  if (selectedName) tryMatch();
+}
+
+function tryMatch() {
+  const nameEl = document.getElementById('m-'+selectedName);
+  const therapyEl = document.getElementById('t-'+selectedTherapy);
+  if (matchAnswers[selectedName] === selectedTherapy) {
+    nameEl.classList.remove('selected'); nameEl.classList.add('matched-correct');
+    therapyEl.classList.remove('selected'); therapyEl.classList.add('matched-correct');
+    matchedCount++;
+    if (matchedCount === 4) document.getElementById('matchResult').innerHTML = '<span style="color:#1a6b4a;font-weight:700">✓ All 4 matched correctly! 🎉</span>';
+  } else {
+    nameEl.classList.add('matched-wrong'); therapyEl.classList.add('matched-wrong');
+    setTimeout(() => {
+      nameEl.classList.remove('matched-wrong','selected');
+      therapyEl.classList.remove('matched-wrong','selected');
+    }, 900);
+  }
+  selectedName = null; selectedTherapy = null;
+}
+
+function resetMatch() {
+  matchedCount = 0; selectedName = null; selectedTherapy = null;
+  document.querySelectorAll('.match-item').forEach(i => { i.classList.remove('matched-correct','matched-wrong','selected'); });
+  document.getElementById('matchResult').textContent = '';
+}
+
+// ═══ QUIZ ═══
+const qdata = [
+  {u:1,c:'#5c3d8f',q:"Gazda defines group counselling as focusing primarily on:",opts:["Unconscious motivation","Conscious thought and behaviours","Medication management","Genetic causes of problems"],ans:1,exp:"Gazda's definition emphasises conscious thought and behaviours — NOT unconscious motivation (that's a key distinction from psychodynamic therapy)."},
+  {u:1,c:'#5c3d8f',q:"T Groups differ from therapy groups because they assume participants are:",opts:["Seriously ill","Well (not ill)","Unconsciously motivated","In need of medication"],ans:1,exp:"T Groups assume participants are well, deal with conscious/preconscious behaviour only, and use present data — not genetic causes."},
+  {u:1,c:'#5c3d8f',q:"The recommended group size in group counselling is:",opts:["2–4","4–12","15–20","20+"],ans:1,exp:"Gazda states one counsellor works with 4–12 counselees. Larger groups weaken individual relationships and increase dependency on the counsellor."},
+  {u:1,c:'#5c3d8f',q:"Which individuals should NOT be included in a counselling group?",opts:["People with different problems","Very aggressive or extremely shy individuals","Both men and women","People with communication anxiety"],ans:1,exp:"The very aggressive, extremely shy, and seriously maladjusted make poor group members. Close friends/relatives should also be kept apart."},
+  {u:1,c:'#5c3d8f',q:"Confidentiality in counselling is best described as:",opts:["A legal concept governed by courts","An ethical concept and professional duty","The same as privileged communication","Optional based on client preference"],ans:1,exp:"Confidentiality is primarily an ethical concept — a professional duty. Privileged communication is the separate legal concept."},
+  {u:1,c:'#5c3d8f',q:"Which ethical principle involves the counsellor's own self-care and development?",opts:["Beneficence","Non-maleficence","Self-Respect","Autonomy"],ans:2,exp:"Self-Respect: fostering the practitioner's self-knowledge, seeking supervision, and continuing professional development."},
+  {u:1,c:'#5c3d8f',q:"The Mental Health Care Act 2017 came into force on:",opts:["7 April 2017","22 May 1987","7 July 2018","1 January 2020"],ans:2,exp:"MHCA was passed on 7 April 2017 but came into force from 7 July 2018. It superseded the Mental Health Act 1987."},
+  {u:1,c:'#5c3d8f',q:"Under MHCA 2017, ECT (electroconvulsive therapy) is:",opts:["Completely banned for everyone","Allowed without restrictions","Completely banned for children; adults need anaesthesia + muscle relaxants","Only allowed in private hospitals"],ans:2,exp:"ECT is completely prohibited for children. For adults, precautions including muscle relaxants and anaesthesia are required."},
+  {u:2,c:'#c0392b',q:"The 'Four Horsemen of the Apocalypse' in the Gottman Method refers to:",opts:["4 stages of marital dissolution","4 negative communication patterns","4 goals of couples therapy","4 attachment styles"],ans:1,exp:"Criticism, Contempt, Defensiveness & Stonewalling — four negative communication patterns that indicate relationship trouble."},
+  {u:2,c:'#c0392b',q:"Which of the Four Horsemen is considered MOST destructive?",opts:["Criticism","Stonewalling","Defensiveness","Contempt"],ans:3,exp:"Contempt — expressing disdain or superiority (eye-rolling, sarcasm, name-calling) — is the most destructive because it fundamentally disrespects the partner."},
+  {u:2,c:'#c0392b',q:"EFT (Emotionally Focused Therapy) is grounded in:",opts:["Social learning theory","Attachment theory","Cognitive-behavioural theory","Psychodynamic theory"],ans:1,exp:"EFT, developed by Sue Johnson & Les Greenberg, is grounded in attachment theory — secure emotional bonds are central to relationship satisfaction."},
+  {u:2,c:'#c0392b',q:"Structural Family Therapy was developed by:",opts:["Jay Haley","Murray Bowen","Salvador Minuchin","Michael White"],ans:2,exp:"Salvador Minuchin developed Structural Family Therapy. It focuses on restructuring family systems, boundaries, and hierarchies using 5 specific principles."},
+  {u:2,c:'#c0392b',q:"'Triangulation' in Bowenian Family Therapy means:",opts:["A three-phase treatment model","When two family members pull a third person into their conflict","A genogram technique for mapping relationships","Three therapists working simultaneously"],ans:1,exp:"Triangulation: when two family members pull a third person into their conflict, creating unhealthy emotional alliances."},
+  {u:2,c:'#c0392b',q:"EMDR uses bilateral stimulation which can include:",opts:["Narrative re-authoring and genograms","Side-to-side eye movements, tapping, or auditory tones","CBT thought records","Family sculpting and role plays"],ans:1,exp:"EMDR uses bilateral (both hemispheres) stimulation: side-to-side eye movements, tactile tapping, or auditory tones while recalling distressing memories."},
+  {u:2,c:'#c0392b',q:"SFBT (Solution-Focused Brief Therapy) for grief typically consists of:",opts:["Open-ended long-term sessions","6–12 limited sessions","Only group sessions","Intensive daily sessions for 1 month"],ans:1,exp:"SFBT is brief — usually 6–12 sessions. It focuses on strengths and solutions, not dwelling on problems."},
+  {u:3,c:'#1a6b4a',q:"The Transtheoretical Model was developed by:",opts:["Bandura & Mischel","Prochaska & DiClemente","Beck & Ellis","Levine & Johnson"],ans:1,exp:"TTM was developed by Prochaska & DiClemente in the late 1970s through studying smokers who quit on their own vs those needing treatment."},
+  {u:3,c:'#1a6b4a',q:"In the Precontemplation stage, the person:",opts:["Is ready to act within 30 days","Has changed behaviour within 6 months","Does not intend to act within the next 6 months","Is weighing pros and cons of changing"],ans:2,exp:"Precontemplation: unaware the behaviour is problematic; does not intend to act within the next 6 months; often denies consequences."},
+  {u:3,c:'#1a6b4a',q:"Which TTM stage involves real behaviour change that started within the LAST 6 months?",opts:["Contemplation","Preparation","Action","Maintenance"],ans:2,exp:"Action stage: real behaviour change starts here; happened within the last 6 months. Typically stressful but manageable with good preparation."},
+  {u:3,c:'#1a6b4a',q:"The Biopsychosocial Model of addiction is considered:",opts:["Least evidence-based","Most widely accepted and comprehensive","Focused only on genetics","A moral/willpower model"],ans:1,exp:"Biopsychosocial model is most widely accepted — it acknowledges the complex interplay of biological, psychological, and social factors."},
+  {u:3,c:'#1a6b4a',q:"Dual diagnosis refers to:",opts:["Two counsellors treating one client","SUD + a mental health disorder occurring simultaneously","Two separate substance addictions","A relapse after sobriety"],ans:1,exp:"Dual diagnosis = co-occurring disorders — both a substance use disorder AND a mental health disorder (e.g., depression + addiction) at the same time."},
+  {u:3,c:'#1a6b4a',q:"Which is a BEHAVIOURAL process of change in the TTM (not cognitive)?",opts:["Consciousness Raising","Emotional Arousal","Self Re-evaluation","Stimulus Control"],ans:3,exp:"Stimulus Control is behavioural (along with Self-Liberation, Reinforcement Management, Helping Relationships). The others are Cognitive/Experiential processes."},
+  {u:4,c:'#b5590a',q:"Which type of validity is considered MOST IMPORTANT and asks 'What is the test really measuring?'",opts:["Content validity","Criterion validity","Construct validity","Consequential validity"],ans:2,exp:"Construct validity is most important — it asks the fundamental question about what the test is truly measuring (e.g., empathy, intelligence)."},
+  {u:4,c:'#b5590a',q:"The MMPI-2 has which type of validity?",opts:["Predictive validity","Concurrent validity","Content validity","Face validity"],ans:1,exp:"MMPI-2 has concurrent validity (criterion available at time of testing). The Strong Interest Inventory (SII) has predictive validity."},
+  {u:4,c:'#b5590a',q:"The MBTI is based on whose theory of personality?",opts:["Sigmund Freud","Abraham Maslow","Carl Jung","Alfred Adler"],ans:2,exp:"MBTI reflects Carl Jung's theory of personality type. It has 166 two-choice items and yields 16 personality types across 4 indexes (EI, SN, TF, JP)."},
+  {u:4,c:'#b5590a',q:"Edumetrics differs from Psychometrics because it compares a client to:",opts:["A norm-referenced group","Their own previous and best results","National average scores","A clinical diagnosis"],ans:1,exp:"Edumetrics (constructivist approach): compares client to their own previous/best performance. Psychometrics compares to a norm-referenced group."}
 ];
 
-let answered = 0;
-let score = 0;
-let started = false;
+let answered=0, score=0;
 
 function startQuiz() {
-  started = true;
-  answered = 0;
-  score = 0;
-  document.getElementById('scoreBox').style.display = 'none';
-  document.getElementById('progressBar').style.display = 'block';
-  updateProgress();
-  const container = document.getElementById('quizContainer');
-  container.innerHTML = '';
-  const shuffled = [...questions].sort(() => Math.random() - 0.5);
-  shuffled.forEach((q, i) => {
-    const unitColors = ['', '#7c6af5', '#e86f4a', '#3dbf8a', '#f0b429'];
-    const unitLabels = ['', 'Unit 1', 'Unit 2', 'Unit 3', 'Unit 4'];
-    const card = document.createElement('div');
-    card.className = 'q-card';
-    card.id = 'q-' + i;
-    card.innerHTML = `
-      <div class="q-num" style="color:${unitColors[q.u]}">${unitLabels[q.u]} · Q${i + 1} of ${questions.length}</div>
-      <div class="q-text">${q.q}</div>
+  answered=0; score=0;
+  document.getElementById('scoreCard').style.display='none';
+  document.getElementById('progWrap').style.display='block';
+  updateProg();
+  const box = document.getElementById('quizBox');
+  box.innerHTML = '';
+  const shuffled = [...qdata].sort(()=>Math.random()-0.5);
+  shuffled.forEach((q,i) => {
+    const uLabel = ['','Unit 1','Unit 2','Unit 3','Unit 4'];
+    const d = document.createElement('div');
+    d.className = 'q-card'; d.id = 'qc'+i;
+    d.innerHTML = `
+      <div class="q-tag" style="color:${q.c}">● ${uLabel[q.u]}</div>
+      <div class="q-text">Q${i+1}. ${q.q}</div>
       <div class="options">
-        ${q.opts.map((o, oi) => `<button class="opt" onclick="answer(this, ${i}, ${oi}, ${q.ans}, '${q.exp.replace(/'/g, "\\'")}')">${o}</button>`).join('')}
+        ${q.opts.map((o,oi)=>`<button class="opt" onclick="pick(this,${i},${oi},${q.ans},\`${q.exp.replace(/`/g,"'")}\`)">${o}</button>`).join('')}
       </div>
-      <div class="explanation" id="exp-${i}">${q.exp}</div>
+      <div class="exp-box" id="ex${i}">💡 ${q.exp}</div>
     `;
-    container.appendChild(card);
+    box.appendChild(d);
   });
 }
 
-function answer(btn, qi, chosen, correct, exp) {
-  const card = document.getElementById('q-' + qi);
-  const opts = card.querySelectorAll('.opt');
-  opts.forEach(o => o.disabled = true);
-  opts[correct].classList.add('correct');
-  if (chosen !== correct) {
-    btn.classList.add('wrong');
-  } else {
-    score++;
-  }
-  document.getElementById('exp-' + qi).classList.add('show');
+function pick(btn, qi, chosen, correct, exp) {
+  const card = document.getElementById('qc'+qi);
+  card.querySelectorAll('.opt').forEach(o => o.disabled=true);
+  card.querySelectorAll('.opt')[correct].classList.add('correct');
+  if (chosen !== correct) btn.classList.add('wrong');
+  else score++;
+  document.getElementById('ex'+qi).classList.add('show');
   answered++;
-  updateProgress();
-  if (answered === questions.length) {
-    setTimeout(showScore, 600);
-  }
+  updateProg();
+  if (answered === qdata.length) setTimeout(showScore, 500);
 }
 
-function updateProgress() {
-  const pct = (answered / questions.length) * 100;
-  document.getElementById('progressFill').style.width = pct + '%';
+function updateProg() {
+  document.getElementById('progBar').style.width = (answered/qdata.length*100)+'%';
 }
 
 function showScore() {
-  document.getElementById('scoreBox').style.display = 'block';
-  document.getElementById('finalScore').textContent = score + '/' + questions.length;
-  const pct = Math.round((score / questions.length) * 100);
-  let msg = pct >= 80 ? "Excellent! You're well prepared. 🌟" : pct >= 60 ? "Good effort — review the sections you missed." : "Keep studying! Focus on your weak units.";
-  document.getElementById('scoreMsg').textContent = `${pct}% — ${msg}`;
-  document.getElementById('scoreBox').scrollIntoView({ behavior: 'smooth' });
+  const sc = document.getElementById('scoreCard');
+  sc.style.display='block';
+  document.getElementById('bigScore').textContent = score+'/'+qdata.length;
+  const pct = Math.round(score/qdata.length*100);
+  let msg, badge;
+  if (pct>=84) { msg="Outstanding! You're exam-ready. 🌟"; badge="🏆 Distinction Level"; }
+  else if (pct>=68) { msg="Good work — review the sections you missed."; badge="📚 Almost There"; }
+  else { msg="Keep at it! Revisit the units and try again."; badge="💪 Keep Studying"; }
+  document.getElementById('scoreMsg').textContent = pct+'% — '+msg;
+  document.getElementById('scoreBadge').textContent = badge;
+  sc.scrollIntoView({behavior:'smooth'});
 }
 
 function resetQuiz() {
-  document.getElementById('quizContainer').innerHTML = '';
-  document.getElementById('scoreBox').style.display = 'none';
-  document.getElementById('progressBar').style.display = 'none';
-  answered = 0; score = 0; started = false;
+  document.getElementById('quizBox').innerHTML='';
+  document.getElementById('scoreCard').style.display='none';
+  document.getElementById('progWrap').style.display='none';
+  answered=0; score=0;
 }
 </script>
 </body>
