@@ -583,6 +583,13 @@ tr.u1:hover td { background: var(--u1b); }
 .stage-label { font-size: 0.82rem; font-weight: 700; }
 .stage-desc { font-size: 0.77rem; color: var(--muted); }
 .stage-time { font-size: 0.7rem; font-weight: 600; border-radius: 20px; padding: 2px 8px; margin-left: 6px; }
+.deep-hero { background: linear-gradient(135deg,#102742,#1f4d7d); color:#edf5ff; border-radius: var(--radius); padding: 16px; margin-bottom: 12px; border:1px solid #3f6490; }
+.deep-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:10px; }
+.deep-chip { font-size:0.7rem; font-weight:700; padding:4px 9px; border-radius:999px; background:#e6eef8; color:#1a3f6b; display:inline-block; margin-right:6px; margin-bottom:6px; }
+.timeline { border-left:3px solid #9c7cc4; padding-left:12px; display:grid; gap:9px; }
+.timeline .t-item { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:9px; }
+.split-note { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+@media(max-width:700px){ .split-note{grid-template-columns:1fr;} }
 @media(max-width:600px) {
   .header-controls { position: static; margin-bottom: 10px; }
 }
@@ -608,10 +615,11 @@ tr.u1:hover td { background: var(--u1b); }
 
 <nav>
   <div class="nav-inner">
-    <button class="tab u1 active" data-tab="u1">🔮 Unit 1 · Intro & Ethics</button>
-    <button class="tab u2" data-tab="u2">❤️ Unit 2 · Marital & Grief</button>
-    <button class="tab u3" data-tab="u3">🌿 Unit 3 · Addictions</button>
-    <button class="tab u4" data-tab="u4">📊 Unit 4 · Testing</button>
+    <button class="tab u1 active" data-tab="u1">🧾 U1 Cheatsheet · Intro & Ethics</button>
+    <button class="tab u2" data-tab="u2">🧾 U2 Cheatsheet · Marital & Grief</button>
+    <button class="tab u3" data-tab="u3">🧾 U3 Cheatsheet · Addictions</button>
+    <button class="tab u4" data-tab="u4">🧾 U4 Cheatsheet · Testing</button>
+    <button class="tab quiz" data-tab="deepdive">📚 Deep Dive Notes</button>
     <button class="tab quiz" data-tab="quiz">🎯 Quiz</button>
     <button class="tab wb" data-tab="wb">📓 Workbook</button>
   </div>
@@ -1503,6 +1511,250 @@ tr.u1:hover td { background: var(--u1b); }
         <div class="card u4-card"><h4>iv. Thought Process, Content & Perception</h4><ul><li>Org, flow & production of thought; delusions, hallucinations</li></ul></div>
         <div class="card u4-card"><h4>v. Cognition</h4><ul><li>Logic, intellect, reasoning, memory</li></ul></div>
         <div class="card u4-card"><h4>vi. Insight & Judgment</h4><ul><li>Awareness of personality traits; ability to consider long-term outcomes</li></ul></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════ DEEP DIVE NOTES ════════════════════════ -->
+<div class="panel" id="deepdive">
+  <div class="deep-hero">
+    <h2 style="margin-bottom:6px">Full Notes Compendium (PDF-Integrated)</h2>
+    <p style="font-size:0.82rem;color:#d7e8ff">This tab now carries full-depth notes across all units, while the original 4 unit tabs remain your rapid revision cheatsheets.</p>
+    <div style="margin-top:8px">
+      <span class="deep-chip">Definitions + founders</span>
+      <span class="deep-chip">All frameworks and stages</span>
+      <span class="deep-chip">Ethics + law + rights</span>
+      <span class="deep-chip">Therapies + techniques</span>
+      <span class="deep-chip">Assessment + test use</span>
+    </div>
+  </div>
+
+  <div class="section open">
+    <div class="section-head" onclick="tog(this)">
+      <h3><span class="tag u1-tag">Unit 1 Full Notes</span> Group Counselling, Ethics, MHCA 2017</h3>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <h4 class="sub">Group Counselling Core</h4>
+      <div class="deep-grid">
+        <div class="card u1-card"><h4 style="color:var(--u1c)">Gazda Definition</h4><p style="font-size:0.8rem">A dynamic interpersonal process focusing on conscious thought and behavior, with permissiveness, reality orientation, catharsis, and mutual trust/support developed through peer sharing and counsellor facilitation.</p></div>
+        <div class="card u1-card"><h4 style="color:var(--u1c)">Who It Is For</h4><p style="font-size:0.8rem">Primarily normal individuals with developmental/situational concerns, not requiring extensive personality reconstruction; focus is growth and adjustment.</p></div>
+        <div class="card u1-card"><h4 style="color:var(--u1c)">Benefits of Groups</h4><ul><li>Belonging and shared concerns</li><li>Observational learning of behavior consequences</li><li>Support for self-exploration and change</li><li>Social bonds and emotional connection</li></ul></div>
+      </div>
+
+      <h4 class="sub">Goals and 6 Group Types</h4>
+      <table>
+        <tr><th>Type</th><th>Core Idea</th><th>Specific Features from Notes</th></tr>
+        <tr><td>T Groups (1947)</td><td>Learning laboratory for present behavior</td><td>10-12 members; unstructured; focuses on conscious/preconscious and immediate reactions; assumes participants are well</td></tr>
+        <tr><td>Personal Growth Groups</td><td>Encounter/sensitivity/human potential</td><td>8-12 members; personal growth, sensitivity, self-other awareness; often multiple facilitators</td></tr>
+        <tr><td>Family Group Consultation</td><td>Improves family understanding and communication</td><td>3-4 families, up to 20 members; whole group hour + split adult/child groups</td></tr>
+        <tr><td>Group Therapy</td><td>Therapeutic principles for deeper issues</td><td>For more seriously disturbed clients; often led by psychiatrists/clinical psychologists; may use video playback</td></tr>
+        <tr><td>Special Therapy Groups</td><td>Lay-created social healing spaces</td><td>Example: Alcoholics Anonymous; reflects institutional/ideological gaps</td></tr>
+        <tr><td>Marathon Groups</td><td>Saturation and intense exploration</td><td>Continuous 15-20 hour sessions; aims for authentic and self-responsible behavior</td></tr>
+      </table>
+
+      <h4 class="sub">Operational Practices (Complete)</h4>
+      <div class="split-note">
+        <div class="card"><h4 style="color:var(--u1c)">Group Setup</h4><ul><li>Member interview before inclusion</li><li>Prefer diversity in age/sex if workable</li><li>Avoid close friends/relatives in same group</li><li>Size often 6-8 (up to 10-12)</li><li>Adolescent sessions 1-1.5 hrs; children 30-45 mins</li><li>One-week spacing often useful; productivity declines beyond 2-3 hrs/week</li><li>Closed groups preserve cohesion; continuous groups can challenge acceptance/communication</li></ul></div>
+        <div class="card"><h4 style="color:var(--u1c)">Process and Skills</h4><ul><li>Early contracting: time/place/confidentiality/roles</li><li>Deep listening, helping others talk, discussing concerns/feelings</li><li>Confrontation and planning as active group tasks</li><li>Counsellor actions: paraphrase, generalize, link members, promote continuity</li><li>Role-playing: useful for perspective and social skills; avoid premature traumatizing externalization</li><li>Termination when concerns are exhausted or majority decides to end</li></ul></div>
+      </div>
+
+      <h4 class="sub">Ethics, Codes, and Law</h4>
+      <div class="deep-grid">
+        <div class="card"><h4 style="color:#5c3d8f">Ethics vs Morality vs Law</h4><ul><li>Ethics: professional standards for conduct</li><li>Morality: personal right-wrong principles</li><li>Law: legal codification; legal is not always ethical</li></ul></div>
+        <div class="card"><h4 style="color:#5c3d8f">Common Unethical Behaviors</h4><ul><li>Confidentiality breaches</li><li>Exceeding competence, negligence</li><li>Value imposition, dependency creation</li><li>Dual relationships and boundary violations</li><li>Sexual misconduct and exploitative financial practices</li></ul></div>
+        <div class="card"><h4 style="color:#5c3d8f">Six Core Principles</h4><ul><li>Autonomy</li><li>Beneficence</li><li>Non-maleficence</li><li>Justice</li><li>Confidentiality</li><li>Self-respect</li></ul></div>
+      </div>
+      <table>
+        <tr><th>ACA Sections</th><th>Coverage</th></tr>
+        <tr><td>A-I</td><td>A Relationship, B Confidentiality, C Responsibility, D Colleagues, E Evaluation/Assessment, F Supervision/Teaching, G Research, H Technology/Social Media, I Resolving Ethical Issues</td></tr>
+      </table>
+      <div class="def-box u1-def">Confidentiality is ethical duty; privileged communication is legal protection. Both must be explained in contracting.</div>
+
+      <h4 class="sub">Mental Healthcare Act 2017 (India)</h4>
+      <div class="timeline">
+        <div class="t-item"><strong>Timeline:</strong> Passed 7 April 2017, effective 7 July 2018, superseded MHA 1987.</div>
+        <div class="t-item"><strong>Rights 1-5:</strong> Advance directive and nominee; access to affordable quality services; free care for BPL/homeless/destitute and essential drugs; right to live in community; protection from cruel/inhuman/degrading treatment with dignity.</div>
+        <div class="t-item"><strong>Rights 6-10:</strong> No prohibited treatment (ECT ban for children; precautions for adults); equality and non-discrimination; right to information and informed decision; confidentiality including digital records; legal aid and right to complaint.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head" onclick="tog(this)">
+      <h3><span class="tag u2-tag">Unit 2 Full Notes</span> Marital, Grief, Trauma, Family, Disability, Queer-Affirmative</h3>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <h4 class="sub">Marital Counselling: Issues + Major Therapies</h4>
+      <div class="deep-grid">
+        <div class="card u2-card"><h4 style="color:var(--u2c)">Common Marital Issues</h4><ul><li>Communication/conflict problems</li><li>Intimacy and trust issues, infidelity</li><li>Life transitions and parenting challenges</li><li>Financial stress and emotional distance</li><li>Addiction and sexual dysfunction</li><li>Cultural/religious differences</li></ul></div>
+        <div class="card u2-card"><h4 style="color:var(--u2c)">Gottman Method</h4><ul><li>Sound Relationship House framework</li><li>Four Horsemen: criticism, contempt, defensiveness, stonewalling</li><li>Evidence-informed communication repair model</li></ul></div>
+        <div class="card u2-card"><h4 style="color:var(--u2c)">EFT (Sue Johnson, Les Greenberg)</h4><ul><li>Attachment-based model</li><li>Stage 1: De-escalation</li><li>Stage 2: Restructuring</li><li>Stage 3: Consolidation</li></ul></div>
+      </div>
+      <table>
+        <tr><th>Therapy</th><th>Key Mechanism</th><th>Use Case</th></tr>
+        <tr><td>CBT</td><td>Cognitive restructuring + behavioral experiments</td><td>Negative thought/behavior cycles</td></tr>
+        <tr><td>BCT</td><td>Operant conditioning, communication skills, contingency management</td><td>Observable behavior change and measurable outcomes</td></tr>
+        <tr><td>SFT/SFBT</td><td>Preferred future and strengths focus</td><td>Brief forward-focused progress</td></tr>
+        <tr><td>Psychodynamic</td><td>Unconscious process, past conflict, defense mechanisms</td><td>Deeper long-term relational patterns</td></tr>
+      </table>
+
+      <h4 class="sub">Grief and Bereavement (Children + Adults)</h4>
+      <div class="split-note">
+        <div class="card">
+          <h4 style="color:var(--u2c)">Children</h4>
+          <ul><li>Expression may be play/withdrawal/somatic complaints</li><li>Need age-appropriate explanations of death</li><li>Interventions: individual, play, group, family therapy</li><li>Aim: coping, stability, support, prevention of long-term impact</li></ul>
+        </div>
+        <div class="card">
+          <h4 style="color:var(--u2c)">Adults</h4>
+          <ul><li>Process complex emotions in safe space</li><li>Address practical disruptions and relationships</li><li>Meaning-making and reduced isolation are core outcomes</li><li>Therapies: CBT, IPT, mindfulness, narrative, existential, attachment-based, expressive, group, DBT, SFBT (often 6-12 sessions)</li></ul>
+        </div>
+      </div>
+
+      <h4 class="sub">Trauma Counselling</h4>
+      <table>
+        <tr><th>Category</th><th>Types from Notes</th></tr>
+        <tr><td>By duration</td><td>Acute, Chronic, Complex trauma</td></tr>
+        <tr><td>By cause</td><td>Physical, Emotional, Sexual trauma</td></tr>
+        <tr><td>Other</td><td>Medical, Attachment, Secondary trauma</td></tr>
+      </table>
+      <div class="deep-grid">
+        <div class="card"><h4 style="color:var(--u2c)">Core Trauma-Informed Principles</h4><ul><li>Safety and trust</li><li>Assessment + collaborative planning</li><li>Choice and empowerment</li><li>Avoid re-traumatization</li></ul></div>
+        <div class="card"><h4 style="color:var(--u2c)">Evidence-Based Interventions</h4><ul><li>EMDR: bilateral stimulation + memory processing</li><li>SET: body-based physiological regulation (Peter Levine)</li><li>Exposure: imaginal + in vivo systematic exposure</li></ul></div>
+      </div>
+
+      <h4 class="sub">Family Counselling and Models</h4>
+      <div class="def-box u2-def">Systemic principle: the family is an interdependent system; circular causality and communication patterns maintain both strengths and problems.</div>
+      <table>
+        <tr><th>Model</th><th>Founders</th><th>Signature Concepts/Techniques</th></tr>
+        <tr><td>Structural</td><td>Salvador Minuchin</td><td>Boundaries, hierarchy, matrix of identity, restructuring dysfunctional interaction patterns</td></tr>
+        <tr><td>Strategic</td><td>Jay Haley, Milton Erickson</td><td>Directives/tasks, paradoxical interventions, reframing, change-focused approach</td></tr>
+        <tr><td>Narrative</td><td>Michael White, David Epston</td><td>Externalization, deconstruction, co-authoring preferred narratives</td></tr>
+        <tr><td>Bowenian</td><td>Murray Bowen</td><td>Differentiation, triangulation, projection process, emotional cutoff, genograms</td></tr>
+      </table>
+
+      <h4 class="sub">Counselling Persons with Disabilities + Queer Affirmative Counselling</h4>
+      <div class="split-note">
+        <div class="card">
+          <h4 style="color:var(--u2c)">Disability Counselling Essentials</h4>
+          <ul><li>Disability types: physical, sensory, intellectual, developmental, psychiatric, neurological, chronic health</li><li>Needs: emotional support, psychoeducation, coping, identity, relationship support, mental health care, life planning, advocacy, inclusion</li></ul>
+        </div>
+        <div class="card">
+          <h4 style="color:var(--u2c)">QACP Tenets</h4>
+          <ul><li>Use inclusive non-derogatory language</li><li>Create visibly queer/trans-inclusive spaces</li><li>Avoid assumptions; respect diversity and disclosure boundaries</li><li>Challenge misinformation, support self-acceptance</li><li>Link clients to resources/NGOs/support groups</li><li>Maintain confidentiality and improve counsellor competence</li><li>Affirmative CBT and person-centered approaches can be adapted safely</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head" onclick="tog(this)">
+      <h3><span class="tag u3-tag">Unit 3 Full Notes</span> Counselling Addictions</h3>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <h4 class="sub">Use, Abuse, Dependence, Addiction</h4>
+      <div class="deep-grid">
+        <div class="card u3-card"><h4 style="color:var(--u3c)">Definitions</h4><ul><li>Use: consumption for medical/recreational/religious reasons</li><li>Abuse: use causing life harm</li><li>Dependence: physical/psychological need with withdrawal risk</li><li>Addiction/SUD: chronic relapsing compulsive seeking/use despite harm</li></ul></div>
+        <div class="card u3-card"><h4 style="color:var(--u3c)">DSM-5 TR Symptoms</h4><ul><li>Using more than intended, failed control attempts, craving</li><li>Task failure at work/school/home, reduced activities</li><li>Risky use despite known harms</li><li>Tolerance and withdrawal</li></ul></div>
+      </div>
+      <h4 class="sub">Special Concepts</h4>
+      <table>
+        <tr><th>Concept</th><th>Core Notes</th></tr>
+        <tr><td>Stages of addiction</td><td>Initial use, abuse, tolerance, dependence, addiction, relapse</td></tr>
+        <tr><td>Polysubstance use</td><td>Intentional (enhance/offset effects) or unintentional (contaminated/mixed supply)</td></tr>
+        <tr><td>Dual diagnosis</td><td>SUD + co-occurring mental disorder; requires integrated treatment planning</td></tr>
+        <tr><td>Codependency</td><td>Overfocus on addict needs; enabling can delay help-seeking/recovery</td></tr>
+      </table>
+
+      <h4 class="sub">8 Models of Addiction (Full)</h4>
+      <div class="deep-grid">
+        <div class="card"><strong>Social/Environmental</strong><p style="font-size:0.78rem">Addiction shaped by social learning, context, poverty, access, stigma, and family climate.</p></div>
+        <div class="card"><strong>Genetic</strong><p style="font-size:0.78rem">Predisposition through gene-related neurobiological pathways; risk is not destiny.</p></div>
+        <div class="card"><strong>Personality</strong><p style="font-size:0.78rem">Traits like sensation seeking, impulsivity, neuroticism may elevate risk.</p></div>
+        <div class="card"><strong>Coping</strong><p style="font-size:0.78rem">Substance use as self-medication for stress/trauma/negative affect; relapse under stress explained.</p></div>
+        <div class="card"><strong>Social Learning</strong><p style="font-size:0.78rem">Observation, modeling, and vicarious reinforcement sustain use patterns.</p></div>
+        <div class="card"><strong>Conditioning</strong><p style="font-size:0.78rem">Classical cue-craving links + operant reward loops maintain behavior.</p></div>
+        <div class="card"><strong>Compulsive</strong><p style="font-size:0.78rem">Habit-driven loss of control despite severe negative consequences.</p></div>
+        <div class="card"><strong>Biopsychosocial</strong><p style="font-size:0.78rem">Most accepted integrated model combining biological, psychological, and social contributors.</p></div>
+      </div>
+
+      <h4 class="sub">TTM: Stages and Processes of Change</h4>
+      <div class="timeline">
+        <div class="t-item"><strong>Stages:</strong> Precontemplation (no action 6 months), Contemplation (intends in 6 months), Preparation (action in 30 days), Action (changed within 6 months), Maintenance (>6 months), Termination (rare).</div>
+        <div class="t-item"><strong>Cognitive-Experiential:</strong> consciousness raising, emotional arousal, self-reevaluation, environmental reevaluation, social liberation.</div>
+        <div class="t-item"><strong>Behavioral:</strong> self-liberation, stimulus control, reinforcement management, helping relationships.</div>
+      </div>
+      <h4 class="sub">Relapse Prevention Framework</h4>
+      <ul>
+        <li>Identify internal and external triggers.</li>
+        <li>Match trigger strategies: cognitive restructuring, urge surfing, exposure, avoid high-risk situations, healthy coping.</li>
+        <li>Build support systems through therapy, groups, and healthy relationships.</li>
+        <li>Develop a written plan with warning signs, coping steps, lifestyle supports, and milestone tracking.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head" onclick="tog(this)">
+      <h3><span class="tag u4-tag">Unit 4 Full Notes</span> Testing and Assessment in Counselling</h3>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <h4 class="sub">Introduction, History, and Foundations</h4>
+      <div class="deep-grid">
+        <div class="card u4-card"><h4 style="color:var(--u4c)">Testing in Counselling</h4><p style="font-size:0.8rem">Testing, assessment, and diagnosis are integral across counselling stages (referral to follow-up). Test results are meaningful only in relation to persons and contexts.</p></div>
+        <div class="card u4-card"><h4 style="color:var(--u4c)">Historical Arc</h4><ul><li>Parsons and vocational guidance</li><li>WWI army testing</li><li>Great Depression vocational batteries</li><li>Post-Sputnik testing expansion</li><li>1970s criticism + current emphasis on proper training</li></ul></div>
+        <div class="card u4-card"><h4 style="color:var(--u4c)">Three Perspectives</h4><ul><li>Test developers</li><li>Test users</li><li>Test takers</li></ul></div>
+      </div>
+      <div class="def-box u4-def">Anastasi: A psychological test is an objective and standardized measure of behavior.</div>
+
+      <h4 class="sub">Qualities of a Good Test</h4>
+      <table>
+        <tr><th>Quality</th><th>Complete Notes Coverage</th></tr>
+        <tr><td>Validity</td><td>Content/face, construct (fundamental), criterion (concurrent + predictive), consequential (social impact)</td></tr>
+        <tr><td>Reliability</td><td>Test-retest, parallel/alternate forms, internal consistency (split-half)</td></tr>
+        <tr><td>Standardization and Norms</td><td>Uniform administration/scoring enables fair comparison; norming biases must be examined, including minority/disability fairness</td></tr>
+      </table>
+
+      <h4 class="sub">Problems and Potential of Test Use</h4>
+      <div class="split-note">
+        <div class="card">
+          <h4 style="color:var(--u4c)">Potential</h4>
+          <ul><li>Self-understanding and future decisions</li><li>Counsellor method selection</li><li>Prediction in selected domains</li><li>Outcome evaluation over time</li></ul>
+        </div>
+        <div class="card">
+          <h4 style="color:var(--u4c)">Problems/Criticisms</h4>
+          <ul><li>Dependency on external score authority</li><li>Prejudicial interpretation or misuse</li><li>Cultural bias and discrimination risks</li><li>Mechanical use, privacy concerns, faking, competitive pressure</li></ul>
+        </div>
+      </div>
+
+      <h4 class="sub">Classification + Core Test Families</h4>
+      <table>
+        <tr><th>Family</th><th>High-Yield Instruments and Notes</th></tr>
+        <tr><td>Intelligence/Aptitude</td><td>Stanford-Binet, Wechsler scales (WPPSI, WISC, WAIS), SAT/ACT/MAT/DAT; verbal/performance/full-scale IQ contexts</td></tr>
+        <tr><td>Interest/Career</td><td>SII (RIASEC link), KOIS (triads, 10 areas), CBI (belief barriers)</td></tr>
+        <tr><td>Personality</td><td>Objective: MMPI-2, MBTI, EPPS, 16PF, CPI, STAI; Projective: Rorschach, TAT, HTP</td></tr>
+        <tr><td>Achievement</td><td>Teacher-made + standardized batteries; school and adult/professional tests including GED and NCE</td></tr>
+      </table>
+
+      <h4 class="sub">Administration, Interpretation, and Assessment</h4>
+      <div class="timeline">
+        <div class="t-item"><strong>Administration:</strong> follow manual exactly; when suitable, involve test takers in selection to improve acceptance and decision ownership.</div>
+        <div class="t-item"><strong>Interpretation types:</strong> descriptive, genetic, predictive, evaluative.</div>
+        <div class="t-item"><strong>Good practice:</strong> use percentile explanations, establish rapport, integrate with interviews and observations, avoid score-only decisions.</div>
+        <div class="t-item"><strong>Assessment purpose (6):</strong> define presenting problem, identify controlling variables, clarify goals, baseline data, educate/motivate, design most effective treatment strategy.</div>
+      </div>
+      <h4 class="sub">MSE Categories (Full)</h4>
+      <div class="grid2">
+        <div class="card u4-card"><h4>i. Appearance, Attitude, Activity</h4><p style="font-size:0.8rem">Physical presentation, interview approach, motor behavior.</p></div>
+        <div class="card u4-card"><h4>ii. Mood and Affect</h4><p style="font-size:0.8rem">Internal feeling state and external emotional expression.</p></div>
+        <div class="card u4-card"><h4>iii. Speech and Language</h4><p style="font-size:0.8rem">Expressive and receptive language quality.</p></div>
+        <div class="card u4-card"><h4>iv. Thought and Perception</h4><p style="font-size:0.8rem">Thought process/content, delusions, hallucinations, anxiety/phobias.</p></div>
+        <div class="card u4-card"><h4>v. Cognition</h4><p style="font-size:0.8rem">Logic, memory, reasoning, intellectual functioning.</p></div>
+        <div class="card u4-card"><h4>vi. Insight and Judgment</h4><p style="font-size:0.8rem">Self-awareness and future-oriented decision quality.</p></div>
       </div>
     </div>
   </div>
